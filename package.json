@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/duxducisarsen/commons_front#readme",
   "dependencies": {
+    "bootstrap": "^5",
     "dayjs": "^1",
     "vue": "^3"
   }
