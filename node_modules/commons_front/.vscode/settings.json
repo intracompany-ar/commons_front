@@ -1,0 +1,22 @@
+{
+    "search.exclude": {
+        "**/node_modules": true,
+        //  "**/vendor": true, Cambié para que si busque dentro de vendor en js
+        "./vendor": true,
+        "**/.backups": true,
+        "**/.notas": true,
+        "**/storage": true,
+        "**/public": true,
+        "**/*.lock": true
+        // ,"**/database/migrations/2100_10_29_163432_auxiliar.php": true
+    },
+    "files.exclude": {
+        "**/.git": false,
+        "**/.md": true
+    },
+    "editor": {
+        "tabSize": 4,
+        "wordWrap": true
+    },
+    "editor.wordWrap": "on",
+}
