@@ -1,17 +1,24 @@
 {
+  "type": "module",
   "name": "commons_front",
   "version": "1.0.2",
   "description": "Archivos compartidos frontend",
   "main": "index.js",
+  "files": ["src"],
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "echo 'Building commons_front...'"
+  },
+  "exports": {
+    ".": "./index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/duxducisarsen/commons_front.git"
   },
   "keywords": [
-    "front"
+    "commons",
+    "frontend"
   ],
   "author": "Alejandro5577",
   "license": "MIT",
