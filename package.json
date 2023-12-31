@@ -1,10 +1,12 @@
 {
   "type": "module",
   "name": "commons_front",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Archivos compartidos frontend",
   "main": "index.js",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "test": "test",
     "build": "echo 'Building commons_front...'"
