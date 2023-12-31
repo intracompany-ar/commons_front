@@ -1,6 +1,6 @@
 {
   "name": "commons_front",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Archivos compartidos frontend",
   "main": "index.js",
   "scripts": {
