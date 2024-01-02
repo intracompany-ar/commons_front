@@ -35,4 +35,5 @@ export { default as TableStandard } from './src/components/TableStandard.vue';
 export { default as CalculadoraChequesDiferidos } from './src/components/finances/CalculadoraChequesDiferidos.vue';
 export { default as CalculadoraCuit } from './src/components/CalculadoraCuit.vue';
 export { default as ModalPpal } from './src/components/ModalPpal.vue';
+export { default as ShowCalificacionEntityId } from './src/components/ShowCalificacionEntityId.vue';
 
