@@ -1,5 +1,5 @@
 <script setup>
-import { closeModals } from 'commons_front'
+import { closeModals } from './../utils/dom'
 
 const props = defineProps({
     id: { required: true, type: String },

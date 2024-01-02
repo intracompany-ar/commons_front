@@ -8,7 +8,7 @@ import {
     tnavToTndv,
     tasaRecargada_to_tnav,
     tasaRecargada_to_tea,
-} from "commons_front";
+} from './../../utils/formulas';
 import dayjs from "dayjs";
 
 // https://www.mav-sa.com.ar/productos/derechos-para-operaciones-de-mercado/
