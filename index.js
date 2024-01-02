@@ -2,8 +2,8 @@ export * from './src/utils/validation';
 export * from './src/utils/metas';
 export * from './src/utils/formulas';
 export * from './src/utils/dom';
-export * from './src/stores';
 export * from './src/components/component_mounter';
+export * from './src/stores/store_advices';
 
 export { default as ButtonPlus } from './src/components/forms/buttons/ButtonPlus.vue';
 export { default as ButtonSubmit } from './src/components/forms/buttons/ButtonSubmit.vue';
