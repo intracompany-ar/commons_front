@@ -6,15 +6,15 @@ export function isEmail(text) {
     return REG_EXP_MAIL.test(String(text).toLowerCase());
 };
 
-export function validarCuit(cuitNoValidado) {
-    cuitNoValidado = cuitNoValidado.toString();
-    // console.log('cuitNoValidado', cuitNoValidado);
-    let cuitSoloNumeros = cuitNoValidado.replace(REG_EXP_DIFFERENT_OF_NUMBER, '');
-    // console.log('cuitSoloNumeros1', cuitSoloNumeros);
-    if (cuitSoloNumeros.length != 11) { return false };
+export function validarEntityId(EntityIdNoValidado) {
+    EntityIdNoValidado = EntityIdNoValidado.toString();
+    // console.log('EntityIdNoValidado', EntityIdNoValidado);
+    let EntityIdSoloNumeros = EntityIdNoValidado.replace(REG_EXP_DIFFERENT_OF_NUMBER, '');
+    // console.log('EntityIdSoloNumeros1', EntityIdSoloNumeros);
+    if (EntityIdSoloNumeros.length != 11) { return false };
 
     let acumulado = 0;
-    let arrayDigitos = cuitSoloNumeros.split("");
+    let arrayDigitos = EntityIdSoloNumeros.split("");
     let ultimoDigito = arrayDigitos.pop(); // elimina el último elemento y lo retorna
 
     arrayDigitos.forEach((element, key) => {
@@ -38,13 +38,13 @@ export function isJson(str) {
 }
 
 /**
- * A partir de un tipo entidad y un dni calcula el cuit
+ * A partir de un tipo entidad y un dni calcula el EntityId
  * 
  * @param string,integer dni
  * @param string tipoEntidadParam  20, 30 por ejemplo
- * @return integer  NroCuit
+ * @return integer  NroEntityId
  */
-export function calculateCuitFromDni(doc, kind) {
+export function calculateEntityIdFromDni(doc, kind) {
     if (!['M', 'F', 'E'].includes(kind)) { return false; }
     let prefix = kind === 'M' ? '20' : kind === 'F' ? '27' : '30'
 
