@@ -4,15 +4,14 @@ import 'dayjs/locale/es';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.locale('es');
 dayjs.extend(relativeTime);
-const props = defineProps({ entitySituacionRespuesta: { required: true, type: [Array, Object] } });
+defineProps({ entitySituacionRespuesta: { required: true, type: [Array, Object] } });
 </script>
 
 <template>
-    <div>
-        <h5>
-            <slot></slot>
-        </h5>
-
+    <h5>
+        <slot></slot>
+    </h5>
+    <div v-if="entitySituacionRespuesta">
         <button type="button" class="btn btn-lg" :class="{
             'btn-danger': entitySituacionRespuesta.dictamen == 'N',
             'btn-warning': entitySituacionRespuesta.dictamen == 'R',
