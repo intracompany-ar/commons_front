@@ -84,6 +84,7 @@ export function tnavToTnaa(tnav) // retorna como indíce (no %) Tasa nominal anu
     return round(parseFloat(tnav) / (1 + parseFloat(tnav)), 12);
 }
 
+
 export function tnaa_to_tnav(tnaa) // retorna como indíce (no %)
 {
     return round(parseFloat(tnaa) / (1 - parseFloat(tnaa)), 12);
@@ -105,6 +106,22 @@ export function tasaRecargada_to_tnav(tasaRecargo, diasAlVencimiento, diasPorAni
     let tnav = tasaRecargo / diasAlVencimiento * diasPorAnio;
     return round(tnav, 12);
 };
+
+/**
+ * Tasa nominal anual a Tasa efectiva anual
+ * 
+ * @param {float} tna en porcentaje, ejemplo 80%
+ * @param {int} cantidadCapitalizaciones PAra semanal: 52, diario: 365 o 360, mensual: 12
+ * @returns float en porcentaje
+ */
+export function tnaToTea(tna, cantidadCapitalizaciones = 12) {
+    let tasaNominalMensual = (tna / 100) / cantidadCapitalizaciones;
+    return Math.round(((Math.pow((1 + tasaNominalMensual), cantidadCapitalizaciones) - 1)) * 10000) / 100
+}
+export function teaToTna(tea, cantidadCapitalizaciones = 12) {
+    let tasaNominalMensual = (tna / 100) / cantidadCapitalizaciones;
+    return Math.round( (Math.pow(tea / 100 + 1, 1 / cantidadCapitalizaciones) - 1) * cantidadCapitalizaciones * 10000) / 100
+}
 
 export function tasaRecargada_to_tea(tasaRecargo, diasAlVencimiento, diasPorAnio = DIAS_ANIO)// diasPorAnio a veces usan 360
 {

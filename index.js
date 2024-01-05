@@ -32,8 +32,10 @@ export { default as RadioLine } from './src/components/forms/radios/RadioLine.vu
 export { default as BadgeQuantityNotifications } from './src/components/notifications/BadgeQuantityNotifications.vue';
 export { default as AdviceNoRecordsToShow } from './src/components/AdviceNoRecordsToShow.vue';
 export { default as TableStandard } from './src/components/TableStandard.vue';
-export { default as CalculadoraChequesDiferidos } from './src/components/finances/CalculadoraChequesDiferidos.vue';
 export { default as CalculadoraCuit } from './src/components/CalculadoraCuit.vue';
 export { default as ModalPpal } from './src/components/ModalPpal.vue';
 export { default as ShowCalificacionEntityId } from './src/components/ShowCalificacionEntityId.vue';
+
+export { default as CalculadoraChequesDiferidos } from './src/components/finances/CalculadoraChequesDiferidos.vue';
+export { default as ConvertTnaTea } from './src/components/finances/ConvertTnaTea.vue';
 
