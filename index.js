@@ -38,5 +38,6 @@ export { default as ShowCalificacionEntityId } from './src/components/ShowCalifi
 
 export { default as ConvertTasaImplicitaDescProntoPago } from './src/components/finances/ConvertTasaImplicitaDescProntoPago.vue';
 export { default as CalculadoraChequesDiferidos } from './src/components/finances/CalculadoraChequesDiferidos.vue';
+export { default as ConvertTasaAnticipadaVencida } from './src/components/finances/ConvertTasaAnticipadaVencida.vue';
 export { default as ConvertTnaTea } from './src/components/finances/ConvertTnaTea.vue';
 
