@@ -36,6 +36,7 @@ export { default as CalculadoraCuit } from './src/components/CalculadoraCuit.vue
 export { default as ModalPpal } from './src/components/ModalPpal.vue';
 export { default as ShowCalificacionEntityId } from './src/components/ShowCalificacionEntityId.vue';
 
+export { default as ConvertTasaImplicitaDescProntoPago } from './src/components/finances/ConvertTasaImplicitaDescProntoPago.vue';
 export { default as CalculadoraChequesDiferidos } from './src/components/finances/CalculadoraChequesDiferidos.vue';
 export { default as ConvertTnaTea } from './src/components/finances/ConvertTnaTea.vue';
 

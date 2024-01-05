@@ -81,9 +81,8 @@ export function round(value, decimals = 2) {
  */
 export function tnavToTnaa(tnav) // retorna como indíce (no %) Tasa nominal anual vencia a adelantada
 {
-    return round(parseFloat(tnav) / (1 + parseFloat(tnav)), 12);
+    return Math.round(parseFloat(tnav) / (1 + parseFloat(tnav)), 12);
 }
-
 
 export function tnaa_to_tnav(tnaa) // retorna como indíce (no %)
 {
