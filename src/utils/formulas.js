@@ -119,7 +119,6 @@ export function tnaToTea(tna, cantidadCapitalizaciones = 12) {
     return Math.round(((Math.pow((1 + tasaNominalMensual), cantidadCapitalizaciones) - 1)) * 10000) / 100
 }
 export function teaToTna(tea, cantidadCapitalizaciones = 12) {
-    let tasaNominalMensual = (tna / 100) / cantidadCapitalizaciones;
     return Math.round( (Math.pow(tea / 100 + 1, 1 / cantidadCapitalizaciones) - 1) * cantidadCapitalizaciones * 10000) / 100
 }
 
