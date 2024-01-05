@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-import { tir, round, tnavToTnaa, tnaa_to_tnav, tnavToTndv, tasaRecargada_to_tnav, tasaRecargada_to_tea } from './../../utils/formulas';
+import { tir, round, tnavToTnaa, tnaaToTnav, tnavToTndv, tasaRecargada_to_tnav, tasaRecargada_to_tea } from './../../utils/formulas';
 import dayjs from "dayjs";
 
 // https://www.mav-sa.com.ar/productos/derechos-para-operaciones-de-mercado/
@@ -107,7 +107,7 @@ const percIVA = computed(() => {
 const tnavPorcConGastosImpuesto = computed(() => {
     let tasaDescontada =
         1 - parseFloat(importe.value.vendedor) / parseFloat(importeNominal.value);
-    let tnav = (tnaa_to_tnav(tasaDescontada) / diasAlVencimiento.value) * DIAS_ANIO;
+    let tnav = (tnaaToTnav(tasaDescontada) / diasAlVencimiento.value) * DIAS_ANIO;
 
     let tasaRecargada =
         parseFloat(importeNominal.value) / parseFloat(importe.value.comprador) - 1; // Lo que voy a cobrar / lo que pago hoy

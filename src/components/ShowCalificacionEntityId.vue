@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/es';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.locale('es');
-dayjs.extend(relativeTime);
+dayjs.extend( relativeTime );
 defineProps({ entitySituacionRespuesta: { required: true, type: [Array, Object] } });
 </script>
 
