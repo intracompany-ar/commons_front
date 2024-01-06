@@ -1,8 +1,10 @@
 export * from './src/utils/validation';
 export * from './src/utils/metas';
 export * from './src/utils/formulas';
+export * from './src/defaults/datatable';
 export * from './src/utils/dom';
 export * from './src/components/component_mounter';
+configDefaultDatatable
 
 export * from './src/stores/store_advices';
 
