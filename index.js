@@ -40,4 +40,5 @@ export { default as ConvertTasaImplicitaDescProntoPago } from './src/components/
 export { default as CalculadoraChequesDiferidos } from './src/components/finances/CalculadoraChequesDiferidos.vue';
 export { default as ConvertTasaAnticipadaVencida } from './src/components/finances/ConvertTasaAnticipadaVencida.vue';
 export { default as ConvertTnaTea } from './src/components/finances/ConvertTnaTea.vue';
+export { default as ExchangeRates } from './src/components/finances/ExchangeRates.vue';
 
