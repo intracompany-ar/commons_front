@@ -30,6 +30,7 @@ export { default as Csrf } from './src/components/forms/inputs/Csrf.vue';
 export { default as RadioLine } from './src/components/forms/radios/RadioLine.vue';
 
 export { default as BadgeQuantityNotifications } from './src/components/notifications/BadgeQuantityNotifications.vue';
+export { default as AdvicesFrontend } from './src/components/notifications/AdvicesFrontend.vue';
 export { default as AdviceNoRecordsToShow } from './src/components/AdviceNoRecordsToShow.vue';
 export { default as TableStandard } from './src/components/TableStandard.vue';
 export { default as CalculadoraCuit } from './src/components/CalculadoraCuit.vue';
@@ -37,6 +38,8 @@ export { default as ModalPpal } from './src/components/ModalPpal.vue';
 export { default as ShowCalificacionEntityId } from './src/components/ShowCalificacionEntityId.vue';
 export { default as Loader } from './src/components/Loader.vue';
 export { default as LoaderError } from './src/components/LoaderError.vue';
+export { default as TableCrud } from './src/components/TableCrud.vue';
+export { default as CrudModal } from './src/components/CrudModal.vue';
 
 export { default as ConvertTasaImplicitaDescProntoPago } from './src/components/finances/ConvertTasaImplicitaDescProntoPago.vue';
 export { default as CalculadoraChequesDiferidos } from './src/components/finances/CalculadoraChequesDiferidos.vue';
