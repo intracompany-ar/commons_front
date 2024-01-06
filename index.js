@@ -4,8 +4,6 @@ export * from './src/utils/formulas';
 export * from './src/defaults/datatable';
 export * from './src/utils/dom';
 export * from './src/components/component_mounter';
-configDefaultDatatable
-
 export * from './src/stores/store_advices';
 
 export { default as ButtonPlus } from './src/components/forms/buttons/ButtonPlus.vue';
