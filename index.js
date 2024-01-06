@@ -15,7 +15,10 @@ export { default as ButtonDirectAccess } from './src/components/forms/buttons/Bu
 export { default as ButtonRefresh } from './src/components/forms/buttons/ButtonRefresh.vue';
 
 
+export { default as LabelClienteNombreEntityIdMail } from './src/components/forms/LabelClienteNombreEntityIdMail.vue';
+export { default as FormEditDelete } from './src/components/forms/FormEditDelete.vue';
 export { default as TextArea } from './src/components/forms/inputs/TextArea.vue';
+export { default as InputCrudImage } from './src/components/forms/inputs/InputCrudImage.vue';
 export { default as InputStandard } from './src/components/forms/inputs/InputStandard.vue';
 export { default as InputFechaDesde } from './src/components/forms/inputs/InputFechaDesde.vue';
 export { default as InputFechaHasta } from './src/components/forms/inputs/InputFechaHasta.vue';
@@ -32,6 +35,7 @@ export { default as RadioLine } from './src/components/forms/radios/RadioLine.vu
 export { default as BadgeQuantityNotifications } from './src/components/notifications/BadgeQuantityNotifications.vue';
 export { default as AdvicesFrontend } from './src/components/notifications/AdvicesFrontend.vue';
 export { default as AdviceNoRecordsToShow } from './src/components/AdviceNoRecordsToShow.vue';
+export { default as ListBadgesFamilies } from './src/components/ListBadgesFamilies.vue';
 export { default as TableStandard } from './src/components/TableStandard.vue';
 export { default as CalculadoraCuit } from './src/components/CalculadoraCuit.vue';
 export { default as ModalPpal } from './src/components/ModalPpal.vue';
