@@ -4,8 +4,8 @@ const props = defineProps({
     name: { required: true, type: String },
     id: { required: false, type: String, default: 'input_fecha' },
     value: { required: false, type: String },
-    max: { required: false, type: Date },
-    min: { required: false, type: Date },
+    max: { required: false, type: String },
+    min: { required: false, type: String },
     readonly: { required: false, type: Boolean, default: false },
     required: { required: false, type: Boolean, default: false },
     small: { required: false, type: Boolean, default: true }

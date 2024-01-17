@@ -1,0 +1,42 @@
+:root {
+	/* //COLORES MICHELIN */
+	--Michelin-amarillo: #fee400;
+	--Michelin-celeste: rgb(0, 79, 158);
+	--Michelin-azulclaro: #27509b;
+	--Michelin-azuloscuro: rgb(0, 0, 153);
+	--Michelin-grismuyoscuro: #222222;
+
+	/* //COLORES FATE */
+	--Fate-rojogastado: #d72f23;
+	--Fate-grismuyclaro: #fefefe;
+	--Fate-beige: #e0e3dc;
+	--Fate-gris: #706e6f;
+	--Fate-grisoscuro: #6a6c6a;
+	--Fate-verde: #00984a;
+	--Fate-amarillo: #FBA900;
+
+	/* // COLORES TENARIS */
+	--Tenaris-azul: #000099;
+	--Tenaris-blanco: #ffffff;
+	--Tenaris-verde: #009900;
+	--Tenaris-rosa: #CC0066;
+	--Tenaris-gris: #4D4D4D;
+
+	/* // COLORES TERNIUM */
+	--Ternium-naranja: #FF9900;
+	--Ternium-rojo: #FF3300;
+	--Ternium-grisoscuro: #666666;
+	--Ternium-grisclaro: #C4C4C4;
+	--Ternium-verdeoscuro: #006600;
+	--Ternium-verdeclaro: #999933;
+	--Ternium-azul: #003366;
+	--Ternium-lila: #CCCCFF;
+
+    /* COLORES ICEO */
+	/* --Iceo-celeste: #FF9900; */
+
+	/* // https://www.colourlovers.com/print/blog/2008/06/20/the-colors-of-global-brand-identities */
+
+	/* // colores pato mandarín */
+
+}

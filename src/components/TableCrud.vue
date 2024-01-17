@@ -1,6 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useStoreAdvices } from './../stores/store_advices'
+import { configDefaultDatatable } from './../defaults/datatable';
+import $ from 'jquery';
+import 'datatables.net';
+$.extend(true, $.fn.dataTable.defaults, configDefaultDatatable);
+
 const storeAdvices = useStoreAdvices()
 const emit = defineEmits(['openModalShow']);
 
