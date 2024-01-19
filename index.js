@@ -13,10 +13,9 @@ export { default as ButtonChat } from './src/components/forms/buttons/ButtonChat
 export { default as ButtonComment } from './src/components/forms/buttons/ButtonComment.vue';
 export { default as ButtonDirectAccess } from './src/components/forms/buttons/ButtonDirectAccess.vue';
 export { default as ButtonRefresh } from './src/components/forms/buttons/ButtonRefresh.vue';
-
-
 export { default as LabelClienteNombreEntityIdMail } from './src/components/forms/LabelClienteNombreEntityIdMail.vue';
 export { default as FormEditDelete } from './src/components/forms/FormEditDelete.vue';
+
 export { default as TextArea } from './src/components/forms/inputs/TextArea.vue';
 export { default as InputCrudImage } from './src/components/forms/inputs/InputCrudImage.vue';
 export { default as InputStandard } from './src/components/forms/inputs/InputStandard.vue';
@@ -38,6 +37,8 @@ export { default as AdviceNoRecordsToShow } from './src/components/AdviceNoRecor
 export { default as ListBadgesFamilies } from './src/components/ListBadgesFamilies.vue';
 export { default as TableStandard } from './src/components/TableStandard.vue';
 export { default as CalculadoraCuit } from './src/components/CalculadoraCuit.vue';
+export { default as CalculadoraMarkUps } from './src/components/CalculadoraMarkUps.vue';
+export { default as CalculadoraMVE } from './src/components/CalculadoraMVE.vue';
 export { default as ModalPpal } from './src/components/ModalPpal.vue';
 export { default as ShowCalificacionEntityId } from './src/components/ShowCalificacionEntityId.vue';
 export { default as Loader } from './src/components/Loader.vue';
