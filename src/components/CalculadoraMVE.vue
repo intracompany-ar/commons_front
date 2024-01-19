@@ -45,7 +45,9 @@ const mvePorc = computed(() => {
 
 <template>
     <!-- MVE: Modificación de Ventas de Equilibrio -->
-    <div class="container">
+    <div class="container mt-4">
+        <h3>Calculadora de Modificación de Ventas de Equilibrio (MVE)</h3>
+
 
         <div class="row">
             <div class="col-12">
