@@ -33,9 +33,7 @@
     "bootstrap": "^5",
     "dayjs": "^1.11.10",
     "pinia": "^2.1.7",
-    "vue": "^3"
-  },
-  "devDependencies": {
+    "vue": "^3",
     "datatables.net": "^1.13.8",
     "jquery": "^3.7.1"
   }
