@@ -22,7 +22,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <label class="form-label" v-bind:for="props.id">Desde:</label>
+    <label class="form-label" v-bind:for="props.id">
+        <slot>Desde:</slot>
+    </label>
     <input type="date" class="form-control" v-bind:class="{ 'form-control-sm': !props.big }" v-bind:name="props.name"
         v-bind:id="props.id" v-on:input="emit('update:modelValue', $event.target.value)">
     <!-- <InputFechaDesde dias="30"></InputFechaDesde> -->

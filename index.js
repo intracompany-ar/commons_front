@@ -1,10 +1,10 @@
-export * from './src/utils/validation';
-export * from './src/utils/metas';
-export * from './src/utils/formulas';
-export * from './src/defaults/datatable';
-export * from './src/utils/dom';
-export * from './src/components/component_mounter';
-export * from './src/stores/store_advices';
+export * from './src/utils/validation.js';// Agregar el .js, sino en proyectos con ts, busca el validation.ts y da error not found
+export * from './src/utils/metas.js';
+export * from './src/utils/formulas.js';
+export * from './src/utils/dom.js';
+export * from './src/stores/store_advices.js';
+export * from './src/defaults/datatable.js';
+export * from './src/components/component_mounter.js';
 
 export { default as ButtonPlus } from './src/components/forms/buttons/ButtonPlus.vue';
 export { default as ButtonSubmit } from './src/components/forms/buttons/ButtonSubmit.vue';
