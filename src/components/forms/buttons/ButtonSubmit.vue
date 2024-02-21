@@ -7,7 +7,7 @@
 
 <template>
     <span>
-        <button type="submit" class="btn btn-secondary btn-neuper mt-2" v-bind:class="{'big': props.big}" v-bind:id="props.id"><slot>ENVIAR</slot></button>
+        <button type="submit" class="btn btn-secondary btn-neuper mt-2" v-bind:class="{'btn-lg': props.big}" v-bind:id="props.id"><slot>ENVIAR</slot></button>
     </span>
 </template>
 
