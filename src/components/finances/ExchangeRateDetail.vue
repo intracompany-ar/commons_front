@@ -7,8 +7,8 @@ defineProps(['data'])
     <h5>
         <slot></slot>
     </h5>
-    Vta <b>{{ data.venta }}</b>
-    <small> al {{ data.fecha }}</small>
-    <br>
-    <small>Cierre de ayer: {{ data.valor_cierre_ant }}</small>
+    <h5 class="text-center bg-success text-white p-1">{{ data.venta }}</h5>
+    <small>Precio Vta al {{ data.fecha }}
+        <br>
+    Cierre de ayer: {{ data.valor_cierre_ant }}</small>
 </template>

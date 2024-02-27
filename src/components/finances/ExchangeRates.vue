@@ -30,10 +30,15 @@ function getRows() {
 </script>
 
 <template>
-    <ExchangeRateDetail v-if="rowsMayorista" :data="rowsMayorista">U$S Mayorista</ExchangeRateDetail>
-    <hr>
-    <ExchangeRateDetail v-if="rowsBlue" :data="rowsBlue">U$S Libre</ExchangeRateDetail>
-    <small><small class="text-muted">Fuente: Ámbito</small></small>
+    <div class="row">
+        <div class="col-6">
+            <ExchangeRateDetail v-if="rowsMayorista" :data="rowsMayorista">U$S Mayorista</ExchangeRateDetail>
+        </div>
+        <div class="col-6">
+            <ExchangeRateDetail v-if="rowsBlue" :data="rowsBlue">U$S Libre</ExchangeRateDetail>
+        </div>
+        <small><small class="text-muted">Fuente: Ámbito</small></small>
+    </div>
     <!-- DOLARHOY.com pero yo preciso el nacion, no coincide con este -->
     <!-- <div><iframe
                 style="width:320px;height:260px;border-radius:10px;box-shadow:2px 4px 4px rgb(0 0 0 / 25%);display:flex;justify-content:center;border:1px solid #bcbcbc"
