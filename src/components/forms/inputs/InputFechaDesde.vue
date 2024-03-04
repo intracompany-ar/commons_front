@@ -15,7 +15,7 @@ const props = defineProps({
 onMounted(() => {
     const el = document.getElementById(props.id);
     if (el) {
-        el.value = dayjs().subtract(props.dias, 'days').format("YYYY-MM-DD")
+        el.value = dayjs().subtract(props.dias, 'day').format("YYYY-MM-DD")
     }
 
 })

@@ -13,9 +13,9 @@ const DIAS_ANIO = 365;
 
 const tasaDescuento = ref(120);
 const importeNominal = ref(100000)
-const fechaVencimiento = ref(dayjs().add(45, "days").format('YYYY-MM-DD'));
+const fechaVencimiento = ref(dayjs().add(45, "day").format('YYYY-MM-DD'));
 const fechaNegociacion = ref(dayjs().format("YYYY-MM-DD"));
-const fechaLiquidacion = ref(dayjs(fechaNegociacion.value).add(1, 'days').format('YYYY-MM-DD')); // T+1: 24hs bursatiles luego de la fecha de concertó);
+const fechaLiquidacion = ref(dayjs(fechaNegociacion.value).add(1, 'day').format('YYYY-MM-DD')); // T+1: 24hs bursatiles luego de la fecha de concertó);
 const tnavPorcDelCpd = ref("120");
 const porcArancelAgenteByma = ref("1");
 const condicionIvaComprador = ref(1);
@@ -23,7 +23,7 @@ const condicionIvaComprador = ref(1);
 const diasAlVencimiento = computed(() => {
     var a = dayjs(fechaVencimiento.value);
     var b = dayjs(fechaLiquidacion.value);
-    return isNaN(a.diff(b, "days")) ? "" : a.diff(b, "days");
+    return isNaN(a.diff(b, "day")) ? "" : a.diff(b, "day");
 });
 
 const importeADescontarSobreValorNominal = computed(() => {

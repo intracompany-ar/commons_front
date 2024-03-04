@@ -22,7 +22,7 @@ export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp
     * Suma los días ponderados de pago
     */
     const fechaPromCobro = computed(() => {
-        return dayjs(fechabase.value).add(promPondDiasPago.value, 'days').format('DD/MM/YYYY')
+        return dayjs(fechabase.value).add(promPondDiasPago.value, 'day').format('DD/MM/YYYY')
     })
 
     const promPondDiasPago = computed(() => {
@@ -50,7 +50,7 @@ export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp
                 if (element[keyDateName] != '' && element[keyAmountNane] != '') {
                     let date1 = dayjs(base);
                     let date2 = dayjs(element[keyDateName]);
-                    element.plazo = date2.diff(date1, 'days');
+                    element.plazo = date2.diff(date1, 'day');
                     element.plazo = element.plazo < 0 ? 0 : element.plazo;
 
                     // Ponderaciones
