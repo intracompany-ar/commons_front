@@ -37,7 +37,6 @@ function getRows() {
         <div class="col-6">
             <ExchangeRateDetail v-if="rowsBlue" :data="rowsBlue">U$S Libre</ExchangeRateDetail>
         </div>
-        <small><small class="text-muted">Fuente: Ámbito</small></small>
     </div>
     <!-- DOLARHOY.com pero yo preciso el nacion, no coincide con este -->
     <!-- <div><iframe
