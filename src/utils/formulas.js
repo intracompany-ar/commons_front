@@ -6,7 +6,7 @@ const DIAS_ANIO = 365;
 export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp') {
 
     const filas = ref([]);
-    const fechabase = ref(dayjs().format("YYYY-MM-DD"));
+    const fechabase = ref(null);
     /**
      * Suma de los importes de los pagos
      */
@@ -16,13 +16,6 @@ export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp
             acum += Number(element[keyAmountNane]);
         })
         return Math.round(acum * 100) / 100;
-    })
-
-    /**
-    * Suma los días ponderados de pago
-    */
-    const fechaPromCobro = computed(() => {
-        return dayjs(fechabase.value).add(promPondDiasPago.value, 'day').format('DD/MM/YYYY')
     })
 
     const promPondDiasPago = computed(() => {
@@ -36,19 +29,27 @@ export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp
     })
 
     /**
+    * Suma los días ponderados de pago
+    */
+    const fechaPromCobro = computed(() => {
+        console.log('fechabase.value', fechabase.value)
+        console.log('promPondDiasPago.value', promPondDiasPago.value)
+        return dayjs(fechabase.value).add(promPondDiasPago.value, 'day').format('DD/MM/YYYY')
+    })
+
+    /**
      * 
      * @param {array} filas [{fecha: '2023-01-01', importe: 5555}]
+     * @param {string} baseDateParam Fecha base para calcular los días de plazo, es el promedio de facturas
      */
-    function calculate(filasParam, baseDate = null, fechabaseParam = null) {
+    function calculate(filasParam, baseDateParam = null) {
         filas.value = filasParam;
-        fechabase.value = fechabaseParam ?? fechabase.value;
+        fechabase.value = baseDateParam ?? dayjs().format("YYYY-MM-DD");
 
-        const base = baseDate ?? dayjs().format("YYYY-MM-DD");
         if (filas.value) {
-
             filas.value.forEach(element => {
                 if (element[keyDateName] != '' && element[keyAmountNane] != '') {
-                    let date1 = dayjs(base);
+                    let date1 = dayjs(fechabase.value);
                     let date2 = dayjs(element[keyDateName]);
                     element.plazo = date2.diff(date1, 'day');
                     element.plazo = element.plazo < 0 ? 0 : element.plazo;
