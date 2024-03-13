@@ -63,16 +63,16 @@ function destroyTable() {
 }
 
 function resetInputs() {
-    console.log('reset inputs', props.columnas);
+    console.debug('reset inputs', props.columnas);
     props.columnas.forEach(columna => {
 
         if (document.querySelector('#' + props.id + '_' + columna.value)) {
             document.querySelector('#' + props.id + '_' + columna.value).value = "";
         };
 
-        console.log('col valor fijo', columna.valorFijo);
+        console.debug('col valor fijo', columna.valorFijo);
         if (columna.valorFijo) {
-            console.log('Set valor fijo', columna.valorFijo);
+            console.debug('Set valor fijo', columna.valorFijo);
             document.querySelector('#' + props.id + '_' + columna.value).value = columna.valorFijo;
         }
     });

@@ -32,8 +32,8 @@ export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp
     * Suma los días ponderados de pago
     */
     const fechaPromCobro = computed(() => {
-        console.log('fechabase.value', fechabase.value)
-        console.log('promPondDiasPago.value', promPondDiasPago.value)
+        console.debug('fechabase.value', fechabase.value)
+        console.debug('promPondDiasPago.value', promPondDiasPago.value)
         return dayjs(fechabase.value).add(promPondDiasPago.value, 'day').format('DD/MM/YYYY')
     })
 

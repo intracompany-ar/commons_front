@@ -36,7 +36,7 @@ onMounted(() => {
             tableCrud.value.getRows();
             tableCrud.value.resetInputs();// Para que setee valores fijos
         });
-        console.log('show modal standard');
+        console.debug('show modal standard');
     });
 
     modal.addEventListener('hidden.bs.modal', () => {

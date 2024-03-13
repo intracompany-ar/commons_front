@@ -39,17 +39,15 @@ function emitir(eventTargetValue) {
                 </div>
             </div>
         </div>
-        <div class="col-6">
-            <div class="col-4">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <input type="radio" class="btn-check" v-bind:name="'descrec' + props.number" value="D"
-                        v-bind:id="'desc' + props.number" v-model="descRec">
-                    <label class="btn btn-outline-secondary btn-sm" v-bind:for="'desc' + props.number">Desc.</label>
+        <div class="col-6 text-end">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <input type="radio" class="btn-check" v-bind:name="'descrec' + props.number" value="D"
+                    v-bind:id="'desc' + props.number" v-model="descRec">
+                <label class="btn btn-outline-secondary btn-sm" v-bind:for="'desc' + props.number">Desc.</label>
 
-                    <input type="radio" class="btn-check" v-bind:name="'descrec' + props.number" value="R"
-                        v-bind:id="'rec' + props.number" v-model="descRec">
-                    <label class="btn btn-outline-secondary btn-sm pb-2" v-bind:for="'rec' + props.number">Rec.</label>
-                </div>
+                <input type="radio" class="btn-check" v-bind:name="'descrec' + props.number" value="R"
+                    v-bind:id="'rec' + props.number" v-model="descRec">
+                <label class="btn btn-outline-secondary btn-sm pb-2" v-bind:for="'rec' + props.number">Rec.</label>
             </div>
         </div>
     </div>
