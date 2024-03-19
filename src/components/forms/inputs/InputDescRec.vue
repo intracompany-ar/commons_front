@@ -27,6 +27,17 @@ function emitir(eventTargetValue) {
 
 <template>
     <div class="row mt-2">
+        <div class="col-6 text-end">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <input type="radio" class="btn-check" v-bind:name="'descrec' + props.number" value="D"
+                    v-bind:id="'desc' + props.number" v-model="descRec">
+                <label class="btn btn-outline-secondary btn-sm" v-bind:for="'desc' + props.number">Desc.</label>
+
+                <input type="radio" class="btn-check" v-bind:name="'descrec' + props.number" value="R"
+                    v-bind:id="'rec' + props.number" v-model="descRec">
+                <label class="btn btn-outline-secondary btn-sm pb-2" v-bind:for="'rec' + props.number">Rec.</label>
+            </div>
+        </div>
         <div class="col-6">
             <div class="input-group">
                 <input type="number" step="0.0001" class="form-control border-end-0  border border-2 border-primary" placeholder=" "
@@ -37,17 +48,6 @@ function emitir(eventTargetValue) {
                         <slot>%</slot>
                     </span>
                 </div>
-            </div>
-        </div>
-        <div class="col-6 text-end">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <input type="radio" class="btn-check" v-bind:name="'descrec' + props.number" value="D"
-                    v-bind:id="'desc' + props.number" v-model="descRec">
-                <label class="btn btn-outline-secondary btn-sm" v-bind:for="'desc' + props.number">Desc.</label>
-
-                <input type="radio" class="btn-check" v-bind:name="'descrec' + props.number" value="R"
-                    v-bind:id="'rec' + props.number" v-model="descRec">
-                <label class="btn btn-outline-secondary btn-sm pb-2" v-bind:for="'rec' + props.number">Rec.</label>
             </div>
         </div>
     </div>
