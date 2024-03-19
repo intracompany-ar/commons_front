@@ -28,11 +28,11 @@ function emitir(eventTargetValue) {
 <template>
     <div class="row mt-2">
         <div class="col-6">
-            <div class="input-group  border border-2 border-primary">
-                <input type="number" step="0.0001" class="form-control" placeholder=" "
+            <div class="input-group">
+                <input type="number" step="0.0001" class="form-control border-end-0  border border-2 border-primary" placeholder=" "
                     v-bind:id="'descuentoRecargo' + props.number"
                     v-bind:value="props.modelValue == 0 ? '' : props.modelValue" v-on:input="emitir($event.target.value)" />
-                <div class="input-group-text">
+                <div class="input-group-text border border-start-0 border-2 border-primary">
                     <span class="input-group-addon">
                         <slot>%</slot>
                     </span>
