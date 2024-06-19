@@ -1,32 +1,29 @@
 <script setup>
-import { onMounted } from 'vue';
-import dayjs from 'dayjs';
+import { ref, watch } from 'vue';
+import dayjs from 'dayjs'
 
 const emit = defineEmits(['update:modelValue']);
 
 const props = defineProps({
-    dias: { required: false, type: [String, Number], default: 30 },
-    modelValue: { required: false },
-    big: { required: false, type: Boolean, default: false },
+    id: { required: false, type: String, default: 'desde' },
     name: { required: false, type: String, default: 'desde' },
-    id: { required: false, type: String, default: 'desde' }
+    big: { required: false, type: Boolean, default: false },
+    dias: { required: false, type: [String, Number], default: 30 },
+    modelValue: { required: false, type: String, default: () => { return '' } }
 })
 
-onMounted(() => {
-    const el = document.getElementById(props.id);
-    if (el) {
-        el.value = dayjs().subtract(props.dias, 'day').format("YYYY-MM-DD")
-    }
+const localValue = ref(props.modelValue)
+localValue.value = dayjs().subtract(props.dias, 'day').format('YYYY-MM-DD')
 
-})
+watch(() => props.modelValue, (newVal) => { localValue.value = newVal })
+watch(localValue, (newVal) => { emit('update:modelValue', newVal) })
 </script>
 
 <template>
-    <label class="form-label" v-bind:for="props.id">
+    <label class="form-label" :for="props.id">
         <slot>Desde:</slot>
     </label>
-    <input type="date" class="form-control" v-bind:class="{ 'form-control-sm': !props.big }" v-bind:name="props.name"
-        v-bind:id="props.id" v-on:input="emit('update:modelValue', $event.target.value)">
+    <input type="date" class="form-control" :class="{ 'form-control-sm': !props.big }" :name="props.name" :id="props.id" v-model="localValue">
     <!-- <InputFechaDesde dias="30"></InputFechaDesde> -->
 </template>
 
