@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "commons_front",
-  "version": "1.0.46",
+  "version": "1.0.47",
   "description": "Archivos compartidos frontend",
   "main": "index.js",
   "files": [
