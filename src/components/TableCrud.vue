@@ -23,8 +23,8 @@ const props = defineProps({
     urlDestroy: { required: false, type: String, default: null },
     urlShow: { required: false, type: String, default: null },
 
-    paramaterRouteName: { required: false, type: String, default: 'id' },
-    paramaterRouteValue: { required: false, type: Number, default: 0 },
+    parameterRouteName: { required: false, type: String, default: 'id' },
+    parameterRouteValue: { required: false, type: Number, default: 0 },
 
     // Requiere que una columna sea value id para que funcione el delete
     columnas: { required: true, type: Array },
@@ -38,10 +38,9 @@ const props = defineProps({
 defineExpose({ getRows, resetInputs, resetRows, destroyTable })
 function getRows() {
     let url = props.urlIndex;
-    // console.log(this.paramaterRouteValue);
-    if (props.paramaterRouteName) {
-        url = url.replace(':' + props.paramaterRouteName, props.paramaterRouteValue)
-            .replace('%3A' + props.paramaterRouteName, props.paramaterRouteValue);
+    if (props.parameterRouteName) {
+        url = url.replace(':' + props.parameterRouteName, props.parameterRouteValue)
+            .replace('%3A' + props.parameterRouteName, props.parameterRouteValue);
     };
     axios(url)
         .then(response => {
@@ -63,14 +62,12 @@ function destroyTable() {
 }
 
 function resetInputs() {
-    console.debug('reset inputs', props.columnas);
     props.columnas.forEach(columna => {
 
         if (document.querySelector('#' + props.id + '_' + columna.value)) {
             document.querySelector('#' + props.id + '_' + columna.value).value = "";
         };
-
-        console.debug('col valor fijo', columna.valorFijo);
+        
         if (columna.valorFijo) {
             console.debug('Set valor fijo', columna.valorFijo);
             document.querySelector('#' + props.id + '_' + columna.value).value = columna.valorFijo;
@@ -112,14 +109,16 @@ function store() {
 
 function editRow() {
     let formData = {};
+
     props.columnas.forEach(columna => {
         let el = document.querySelector('#' + props.id + '_' + columna.value);
         if (el) { formData[columna.value] = el.value; }
     });
 
     let urlEdit = props.urlUpdate;
-    urlEdit = urlEdit.replace(':' + props.paramaterRouteName, formData.id)
-        .replace('%3A' + props.paramaterRouteName, formData.id);
+
+    urlEdit = urlEdit.replace(':' + props.parameterRouteName, formData[props.parameterRouteName])
+        .replace('%3A' + props.parameterRouteName, formData[props.parameterRouteName]);
 
     axios.put(urlEdit, formData)
         .then(response => {
@@ -134,8 +133,8 @@ function deleteRow(id) {
     if (confirm('Seguro desea eliminar este elemento?')) {
 
         let urlDelete = props.urlDestroy;
-        urlDelete = urlDelete.replace(':' + props.paramaterRouteName, id)
-            .replace('%3A' + props.paramaterRouteName, id);
+        urlDelete = urlDelete.replace(':' + props.parameterRouteName, id)
+            .replace('%3A' + props.parameterRouteName, id);
 
         axios.delete(urlDelete)
             .then(response => {
@@ -154,11 +153,11 @@ function evaluarVariableString(row, valueAux) {
 </script>
 
 <template>
-    <table v-bind:id="'table_' + props.id" class="table table-sm table-striped table-hover table-bordered compact"
+    <table :id="'table_' + props.id" class="table table-sm table-striped table-hover table-bordered compact"
         width="100%" cellspacing="0" border="1">
         <thead>
             <tr v-if="props.urlStore || props.urlUpdate">
-                <td v-for="(columna, index) in columnas" v-bind:key="index">
+                <td v-for="(columna, index) in columnas" :key="index">
                     <div v-if="father_id != 0">
                         Hijo de {{ father_id }}
 
@@ -167,12 +166,12 @@ function evaluarVariableString(row, valueAux) {
                     </div>
 
                     <input v-if="['hidden', 'text', 'number', 'date'].includes(columna.type)"
-                        class="form-control form-control-sm" v-bind:type="columna.type"
-                        v-bind:id="props.id + '_' + columna.value">
+                        class="form-control form-control-sm" :type="columna.type"
+                        :id="props.id + '_' + columna.value">
 
                     <select v-if="columna.type == 'select'" class="form-control form-control-sm"
-                        v-bind:id="props.id + '_' + columna.value">
-                        <option v-for="option in columna.selectOptions" v-bind:value="option.id">{{ option.name }}</option>
+                        :id="props.id + '_' + columna.value">
+                        <option v-for="option in columna.selectOptions" :value="option.id">{{ option.name }}</option>
                     </select>
                 </td>
 
@@ -192,15 +191,15 @@ function evaluarVariableString(row, valueAux) {
             </tr>
 
             <tr class="thead-inverse">
-                <th scope="col" v-for="(columna, index) in columnas" v-bind:key="index">{{ columna.titulo }}</th>
+                <th scope="col" v-for="(columna, index) in columnas" :key="index">{{ columna.titulo }}</th>
                 <th v-if="props.urlUpdate || props.urlDestroy"></th>
             </tr>
 
         </thead>
 
         <tbody>
-            <tr v-for="(row, index) in rows" v-bind:key="index">
-                <td v-for="(columna, index) in columnas" v-bind:key="index">
+            <tr v-for="(row, index) in rows" :key="index">
+                <td v-for="(columna, index) in columnas" :key="index">
                     <div v-if="columna.valueAux">
                         {{ evaluarVariableString(row, columna.valueAux) }}
                     </div>
@@ -209,11 +208,11 @@ function evaluarVariableString(row, valueAux) {
                     </div>
                 </td>
 
-                <td v-if="props.urlUpdate || props.urlDestroy">
+                <td v-if="props.urlUpdate || props.urlDestroy || props.urlShow || props.modalShow || props.fatherField != ''">
                     <a v-if="props.urlUpdate" href="#" v-on:click.prevent="pasarAEdicion(row)">
                         <i class="fas fa-edit"></i></a>
                     &nbsp;
-                    <a v-if="props.urlDestroy" href="#" v-on:click.prevent="deleteRow(row.id)">
+                    <a v-if="props.urlDestroy" href="#" v-on:click.prevent="deleteRow(row[props.parameterRouteName])">
                         <i class="fas fa-trash-alt"></i></a>
                     &nbsp;
 
@@ -221,12 +220,12 @@ function evaluarVariableString(row, valueAux) {
                         <i class="fas fa-eye"></i>
                     </a>
 
-                    <a v-bind:href="props.urlShow.replace(':id', row.id).replace('%3Aid', row.id)" target="_blank"
-                        v-if="props.urlShow">
+                    <a v-if="props.urlShow" :href="props.urlShow.replace(':id', row[props.parameterRouteName]).replace('%3Aid', row[props.parameterRouteName])" target="_blank"
+                        >
                         <i class="fas fa-eye"></i>
                     </a>
                     &nbsp;
-                    <a v-if="props.fatherField != ''" href="#" v-on:click.prevent="pasarAModoAdd(row.id)">
+                    <a v-if="props.fatherField != ''" href="#" v-on:click.prevent="pasarAModoAdd(row[props.parameterRouteName])">
                         Agregar hijo
                     </a>
                 </td>

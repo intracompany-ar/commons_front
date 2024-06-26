@@ -1,7 +1,7 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, nextTick } from 'vue'
 import ModalPpal from './ModalPpal.vue'
-import TableCrud from './TableCrud.vue';
+import TableCrud from './TableCrud.vue'
 
 const tableCrud = ref(null);
 
@@ -13,8 +13,8 @@ const props = defineProps({
 
     // Para TableCrud
     urlIndex: { required: true, type: String },
-    paramaterRouteName: { required: false, type: String, default: 'id' },
-    paramaterRouteValue: { required: false, type: Number, default: 0 },
+    parameterRouteName: { required: false, type: String, default: 'id' },
+    parameterRouteValue: { required: false, type: Number, default: 0 },
 
     urlStore: { required: false, type: String, default: null },
     urlUpdate: { required: false, type: String, default: null },
@@ -28,11 +28,33 @@ const props = defineProps({
     fatherField: { required: false, type: String, default: '' }
 })
 
+const parametersTableCrud = {
+    parameterRouteName: props.parameterRouteName,
+    parameterRouteValue: props.parameterRouteValue,
+    urlIndex: props.urlIndex,
+    urlStore: props.urlStore,
+    urlUpdate: props.urlUpdate,
+    urlDestroy: props.urlDestroy,
+    urlShow: props.urlShow,
+    columnas: props.columnas,
+    datatable: props.datatable,
+    selectOptions: props.selectOptions,
+    fatherField: props.fatherField,
+    id: props.modalId
+}
+
+const parametersModal = {
+    titulo: props.titulo,
+    id: props.modalId,
+    large: props.large
+}
+
+
 onMounted(() => {
     let modal = document.getElementById(props.modalId);
     modal.addEventListener('show.bs.modal', () => {
         tableCrud.value.resetRows();
-        nextTick(() => { // Sino el getRows se ejecuta antes de la actualización del parámetro  paramaterRouteValue
+        nextTick(() => { // Sino el getRows se ejecuta antes de la actualización del parámetro  parameterRouteValue
             tableCrud.value.getRows();
             tableCrud.value.resetInputs();// Para que setee valores fijos
         });
@@ -46,14 +68,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <ModalPpal v-bind:titulo="titulo" v-bind:id="modalId" v-bind:large="large">
+    <ModalPpal v-bind="parametersModal">
         <template v-slot:bodymodal>
-            <TableCrud ref="tableCrud" v-bind:id="props.modalId" v-bind:url-index="props.urlIndex"
-                v-bind:paramater-route-name="props.paramaterRouteName"
-                v-bind:paramater-route-value="props.paramaterRouteValue" v-bind:url-store="props.urlStore"
-                v-bind:url-update="props.urlUpdate" v-bind:url-destroy="props.urlDestroy" v-bind:url-show="props.urlShow"
-                v-bind:columnas="props.columnas" v-bind:datatable="props.datatable"
-                v-bind:select-options="props.selectOptions" v-bind:father-field="props.fatherField" />
+            <TableCrud ref="tableCrud" v-bind="parametersTableCrud"/>
         </template>
     </ModalPpal>
 </template>
