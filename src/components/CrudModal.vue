@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
 import ModalPpal from './ModalPpal.vue'
 import TableCrud from './TableCrud.vue'
 
@@ -28,7 +28,7 @@ const props = defineProps({
     fatherField: { required: false, type: String, default: '' }
 })
 
-const parametersTableCrud = {
+const parametersTableCrud = computed(() => ({
     parameterRouteName: props.parameterRouteName,
     parameterRouteValue: props.parameterRouteValue,
     urlIndex: props.urlIndex,
@@ -41,18 +41,20 @@ const parametersTableCrud = {
     selectOptions: props.selectOptions,
     fatherField: props.fatherField,
     id: props.modalId
-}
+}))
 
-const parametersModal = {
+const parametersModal = computed(() => ({
     titulo: props.titulo,
     id: props.modalId,
     large: props.large
-}
-
+}))
 
 onMounted(() => {
     let modal = document.getElementById(props.modalId);
     modal.addEventListener('show.bs.modal', () => {
+        console.log('show modal', props)
+        console.log('parametersTableCrud', parametersTableCrud)
+        
         tableCrud.value.resetRows();
         nextTick(() => { // Sino el getRows se ejecuta antes de la actualización del parámetro  parameterRouteValue
             tableCrud.value.getRows();
@@ -70,6 +72,7 @@ onMounted(() => {
 <template>
     <ModalPpal v-bind="parametersModal">
         <template v-slot:bodymodal>
+            {{parametersTableCrud}}
             <TableCrud ref="tableCrud" v-bind="parametersTableCrud"/>
         </template>
     </ModalPpal>
