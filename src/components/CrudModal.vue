@@ -72,7 +72,6 @@ onMounted(() => {
 <template>
     <ModalPpal v-bind="parametersModal">
         <template v-slot:bodymodal>
-            {{parametersTableCrud}}
             <TableCrud ref="tableCrud" v-bind="parametersTableCrud"/>
         </template>
     </ModalPpal>
