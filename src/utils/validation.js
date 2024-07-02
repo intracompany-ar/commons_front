@@ -1,4 +1,4 @@
-// CommonsFron v1 Copyright (c) 2023 Alejandro5577
+// CommonsFront v1 Copyright (c) 2023 IntraCompany
 const REG_EXP_MAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const REG_EXP_DIFFERENT_OF_NUMBER = /[^0-9]/g;
 
