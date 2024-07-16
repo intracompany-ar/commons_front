@@ -31,12 +31,13 @@ function getRows() {
 
 <template>
     <div class="row">
-        <div class="col-6">
+        <div class="col-6 col-md-12">
             <ExchangeRateDetail v-if="rowsMayorista" :data="rowsMayorista">U$S Mayorista</ExchangeRateDetail>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-md-12">
             <ExchangeRateDetail v-if="rowsBlue" :data="rowsBlue">U$S Libre</ExchangeRateDetail>
         </div>
+        <small class="text-muter"><small>Fuente: Ámbito</small></small>
     </div>
     <!-- DOLARHOY.com pero yo preciso el nacion, no coincide con este -->
     <!-- <div><iframe
