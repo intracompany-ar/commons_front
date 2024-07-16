@@ -42,7 +42,11 @@ function getRows() {
         url = url.replace(':' + props.parameterRouteName, props.parameterRouteValue)
             .replace('%3A' + props.parameterRouteName, props.parameterRouteValue);
     };
-    axios(url)
+    axios(url, {
+            headers: {
+                'Cache-Control': 'no-cache'
+            }
+        })
         .then(response => {
             try {
                 rows.value = JSON.parse(response.data)
