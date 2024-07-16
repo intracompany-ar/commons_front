@@ -30,7 +30,7 @@ function getRows() {
 </script>
 
 <template>
-    <div class="row">
+    <div class="row mx-0 p-1">
         <div class="col-6 col-md-12">
             <ExchangeRateDetail v-if="rowsMayorista" :data="rowsMayorista">U$S Mayorista</ExchangeRateDetail>
         </div>
