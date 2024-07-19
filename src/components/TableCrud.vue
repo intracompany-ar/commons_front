@@ -32,7 +32,10 @@ const props = defineProps({
     selectOptions: { required: false, type: [Array, Object], default() { return [] } },
     fatherField: { required: false, type: String, default: '' },
 
-    modalShow: { required: false, type: Boolean, default: false }
+    modalShow: { required: false, type: Boolean, default: false },
+    config: { required: false, type: Object, default() { return {
+        api: false
+    }}}
 })
 
 defineExpose({ getRows, resetInputs, resetRows, destroyTable })
@@ -43,6 +46,7 @@ function getRows() {
             .replace('%3A' + props.parameterRouteName, props.parameterRouteValue);
     };
     axios(url, {
+            api: props.config.api,
             headers: {
                 'Cache-Control': 'no-cache'
             }
@@ -103,7 +107,7 @@ function store() {
             formData[props.fatherField] = father_id.value;
         }
     });
-    axios.post(props.urlStore, formData)
+    axios.post(props.urlStore, formData, {api: props.config.api})
         .then(() => {
             if (props.datatable && tabla && tabla.value) { tabla.value.destroy() }
             getRows();
@@ -124,7 +128,7 @@ function editRow() {
     urlEdit = urlEdit.replace(':' + props.parameterRouteName, formData[props.parameterRouteName])
         .replace('%3A' + props.parameterRouteName, formData[props.parameterRouteName]);
 
-    axios.put(urlEdit, formData)
+    axios.put(urlEdit, formData, {api: props.config.api})
         .then(response => {
             storeAdvices.success('Actualizado');
             if (props.datatable && tabla && tabla.value) { tabla.value.destroy() }
@@ -140,7 +144,7 @@ function deleteRow(id) {
         urlDelete = urlDelete.replace(':' + props.parameterRouteName, id)
             .replace('%3A' + props.parameterRouteName, id);
 
-        axios.delete(urlDelete)
+        axios.delete(urlDelete, {api: props.config.api})
             .then(response => {
                 storeAdvices.success('Elemento eliminado');
                 if (props.datatable && tabla && tabla.value) { tabla.value.destroy() }

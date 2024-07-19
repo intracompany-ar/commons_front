@@ -25,7 +25,12 @@ const props = defineProps({
     columnas: { required: true, type: Array },
     datatable: { required: false, type: Boolean, default: false },
     selectOptions: { required: false, type: [Array, Object], default() { return [] } },
-    fatherField: { required: false, type: String, default: '' }
+    fatherField: { required: false, type: String, default: '' },
+
+    config: { required: false, type: Object, default() { return {
+        api: false
+    } } }
+
 })
 
 const parametersTableCrud = computed(() => ({
@@ -40,7 +45,8 @@ const parametersTableCrud = computed(() => ({
     datatable: props.datatable,
     selectOptions: props.selectOptions,
     fatherField: props.fatherField,
-    id: props.modalId
+    id: props.modalId,
+    config: props.config
 }))
 
 const parametersModal = computed(() => ({
