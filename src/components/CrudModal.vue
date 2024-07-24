@@ -12,14 +12,10 @@ const props = defineProps({
     modalId: { required: true, type: String },//Tmb la uso para los id de la table
 
     // Para TableCrud
-    urlIndex: { required: true, type: String },
+    model: { required: true, type: String },
     parameterRouteName: { required: false, type: String, default: 'id' },
     parameterRouteValue: { required: false, type: Number, default: 0 },
 
-    urlStore: { required: false, type: String, default: null },
-    urlUpdate: { required: false, type: String, default: null },
-    urlDestroy: { required: false, type: String, default: null },
-    urlShow: { required: false, type: String, default: null },
 
     // Requiere que una columna sea value id para que funcione el delete
     columnas: { required: true, type: Array },
@@ -34,13 +30,9 @@ const props = defineProps({
 })
 
 const parametersTableCrud = computed(() => ({
+    model: props.model,
     parameterRouteName: props.parameterRouteName,
     parameterRouteValue: props.parameterRouteValue,
-    urlIndex: props.urlIndex,
-    urlStore: props.urlStore,
-    urlUpdate: props.urlUpdate,
-    urlDestroy: props.urlDestroy,
-    urlShow: props.urlShow,
     columnas: props.columnas,
     datatable: props.datatable,
     selectOptions: props.selectOptions,

@@ -17,12 +17,7 @@ const tabla = ref(null)
 const props = defineProps({
     id: { required: true, type: String }, // Tmb la uso para los id de la table
 
-    urlIndex: { required: true, type: String },
-    urlStore: { required: false, type: String, default: null },
-    urlUpdate: { required: false, type: String, default: null },
-    urlDestroy: { required: false, type: String, default: null },
-    urlShow: { required: false, type: String, default: null },
-
+    model: { required: true, type: String },
     parameterRouteName: { required: false, type: String, default: 'id' },
     parameterRouteValue: { required: false, type: Number, default: 0 },
 
@@ -33,24 +28,21 @@ const props = defineProps({
     fatherField: { required: false, type: String, default: '' },
 
     modalShow: { required: false, type: Boolean, default: false },
+
     config: { required: false, type: Object, default() { return {
-        api: false
-    }}}
+        crud: false,
+        show: false,
+    } } }
 })
 
 defineExpose({ getRows, resetInputs, resetRows, destroyTable })
 function getRows() {
-    let url = props.urlIndex;
+    let url = props.model;
     if (props.parameterRouteName) {
         url = url.replace(':' + props.parameterRouteName, props.parameterRouteValue)
             .replace('%3A' + props.parameterRouteName, props.parameterRouteValue);
     };
-    axios(url, {
-            api: props.config.api,
-            headers: {
-                'Cache-Control': 'no-cache'
-            }
-        })
+    axios(url)
         .then(response => {
             try {
                 rows.value = JSON.parse(response.data)
@@ -107,7 +99,7 @@ function store() {
             formData[props.fatherField] = father_id.value;
         }
     });
-    axios.post(props.urlStore, formData, {api: props.config.api})
+    axios.post(props.model, formData)
         .then(() => {
             if (props.datatable && tabla && tabla.value) { tabla.value.destroy() }
             getRows();
@@ -123,12 +115,9 @@ function editRow() {
         if (el) { formData[columna.value] = el.value; }
     });
 
-    let urlEdit = props.urlUpdate;
+    let urlEdit = props.model;
 
-    urlEdit = urlEdit.replace(':' + props.parameterRouteName, formData[props.parameterRouteName])
-        .replace('%3A' + props.parameterRouteName, formData[props.parameterRouteName]);
-
-    axios.put(urlEdit, formData, {api: props.config.api})
+    axios.put(urlEdit+'/'+formData[props.parameterRouteName], formData)
         .then(response => {
             storeAdvices.success('Actualizado');
             if (props.datatable && tabla && tabla.value) { tabla.value.destroy() }
@@ -139,12 +128,8 @@ function editRow() {
 
 function deleteRow(id) {
     if (confirm('Seguro desea eliminar este elemento?')) {
-
-        let urlDelete = props.urlDestroy;
-        urlDelete = urlDelete.replace(':' + props.parameterRouteName, id)
-            .replace('%3A' + props.parameterRouteName, id);
-
-        axios.delete(urlDelete, {api: props.config.api})
+        let urlDelete = props.model;
+        axios.delete(urlDelete+'/'+id)
             .then(response => {
                 storeAdvices.success('Elemento eliminado');
                 if (props.datatable && tabla && tabla.value) { tabla.value.destroy() }
@@ -164,7 +149,7 @@ function evaluarVariableString(row, valueAux) {
     <table :id="'table_' + props.id" class="table table-sm table-striped table-hover table-bordered compact"
         width="100%" cellspacing="0" border="1">
         <thead>
-            <tr v-if="props.urlStore || props.urlUpdate">
+            <tr>
                 <td v-for="(columna, index) in columnas" :key="index">
                     <div v-if="father_id != 0">
                         Hijo de {{ father_id }}
@@ -184,15 +169,15 @@ function evaluarVariableString(row, valueAux) {
                 </td>
 
                 <td>
-                    <a href="#" v-on:click.prevent="store" class="btn btn-secondary" v-show="props.urlStore && !modoEdit">
+                    <a href="#" v-on:click.prevent="store" class="btn btn-secondary" v-show="!modoEdit">
                         <i class="fas fa-save"></i></a>
 
                     <a href="#" v-on:click.prevent="editRow" class="btn btn-secondary btn-sm"
-                        v-show="props.urlUpdate && modoEdit">
+                        v-show="modoEdit">
                         <i class="far fa-edit"></i></a>
 
                     <a href="#" v-on:click.prevent="pasarAModoAdd()" class="btn btn-primary btn-sm"
-                        v-show="props.urlUpdate && modoEdit">
+                        v-show="modoEdit">
                         <i class="fas fa-times"></i></a>
                 </td>
 
@@ -200,7 +185,7 @@ function evaluarVariableString(row, valueAux) {
 
             <tr class="thead-inverse">
                 <th scope="col" v-for="(columna, index) in columnas" :key="index">{{ columna.titulo }}</th>
-                <th v-if="props.urlUpdate || props.urlDestroy"></th>
+                <th></th>
             </tr>
 
         </thead>
@@ -216,11 +201,11 @@ function evaluarVariableString(row, valueAux) {
                     </div>
                 </td>
 
-                <td v-if="props.urlUpdate || props.urlDestroy || props.urlShow || props.modalShow || props.fatherField != ''">
-                    <a v-if="props.urlUpdate" href="#" v-on:click.prevent="pasarAEdicion(row)">
+                <td>
+                    <a href="#" v-on:click.prevent="pasarAEdicion(row)">
                         <i class="fas fa-edit"></i></a>
                     &nbsp;
-                    <a v-if="props.urlDestroy" href="#" v-on:click.prevent="deleteRow(row[props.parameterRouteName])">
+                    <a href="#" v-on:click.prevent="deleteRow(row[props.parameterRouteName])">
                         <i class="fas fa-trash-alt"></i></a>
                     &nbsp;
 
@@ -228,10 +213,9 @@ function evaluarVariableString(row, valueAux) {
                         <i class="fas fa-eye"></i>
                     </a>
 
-                    <a v-if="props.urlShow" :href="props.urlShow.replace(':id', row[props.parameterRouteName]).replace('%3Aid', row[props.parameterRouteName])" target="_blank"
-                        >
+                    <router-link v-if="props.config.show" :to="'/'+props.model+'/'+row[props.parameterRouteName]" >
                         <i class="fas fa-eye"></i>
-                    </a>
+                    </router-link>
                     &nbsp;
                     <a v-if="props.fatherField != ''" href="#" v-on:click.prevent="pasarAModoAdd(row[props.parameterRouteName])">
                         Agregar hijo
