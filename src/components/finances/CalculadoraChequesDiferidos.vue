@@ -11,12 +11,12 @@ const DIAS_MAX_PRORRATEO_DERECHO_MERCADO = 90;
 const TASA_IVA = 0.21;
 const DIAS_ANIO = 365;
 
-const tasaDescuento = ref(120);
+const tasaDescuento = ref(29);
 const importeNominal = ref(100000)
 const fechaVencimiento = ref(dayjs().add(45, "day").format('YYYY-MM-DD'));
 const fechaNegociacion = ref(dayjs().format("YYYY-MM-DD"));
 const fechaLiquidacion = ref(dayjs(fechaNegociacion.value).add(1, 'day').format('YYYY-MM-DD')); // T+1: 24hs bursatiles luego de la fecha de concertó);
-const tnavPorcDelCpd = ref("120");
+const tnavPorcDelCpd = ref("29");
 const porcArancelAgenteByma = ref("1");
 const condicionIvaComprador = ref(1);
 
@@ -27,8 +27,7 @@ const diasAlVencimiento = computed(() => {
 });
 
 const importeADescontarSobreValorNominal = computed(() => {
-    let tasaNetaADescontarVencida = tnavToTndv(parseFloat(tnavPorcDelCpd.value) / 100) *
-        diasAlVencimiento.value;
+    let tasaNetaADescontarVencida = tnavToTndv(parseFloat(tnavPorcDelCpd.value) / 100) * diasAlVencimiento.value;
     return round(parseFloat(importeNominal.value) * tnavToTnaa(tasaNetaADescontarVencida));
 });
 
@@ -135,18 +134,17 @@ const teaEquivalente = computed(() => {
 </script>
 
 <template>
-    <div class="container-fluid">
-
+    <div class="container bg-secondary bg-opacity-25">
         <div class="row">
-            <div class="col-12 col-md-4 p-1 border border-4 rounded">
+            <div class="col-12 col-md-6 p-1">
                 <div class="row">
                     <h4>Cheque</h4>
-                    <div class="col-7">
+                    <div class="col-6">
                         <label for="importeNominal">$ Imp Nominal:</label>
                         <input type="number" class="form-control" id="importeNominal" name="importeNominal" max="1000000000"
                             min="0" v-model="importeNominal" />
                     </div>
-                    <div class="col-7">
+                    <div class="col-6">
                         <label for="fechaVencimiento">Fecha Vto Cheque:</label>
                         <input type="date" class="form-control" id="fechaVencimiento" name="fechaVencimiento"
                             v-model="fechaVencimiento" />
@@ -156,8 +154,10 @@ const teaEquivalente = computed(() => {
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-12 col-md-4 p-1 border border-4 rounded">
+        <div class="row">
+            <div class="col-12 col-md-6 p-1 border border-4 rounded">
                 <div class="row">
                     <h4>Negociación</h4>
                     <div class="col-6 mb-2">
@@ -199,6 +199,123 @@ const teaEquivalente = computed(() => {
         </div>
 
         <hr>
+
+       
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <table class="table table-borderd">
+                    <tbody>
+                        <tr>
+                            <th>Importe Nominal CPD </th>
+                            <td colspan="2">$ {{ importeNominal }}</td>
+                        </tr>
+                        <tr>
+                            <th>Descuento</th>
+                            <td colspan="2">$ {{ importeADescontarSobreValorNominal }} <small class="text-muted">{{ round(100*importeADescontarSobreValorNominal /importeNominal ,2) }}% </small></td>
+                        </tr>
+                        <tr>
+                            <th>Bruto a cobrar / pagar </th>
+                            <td colspan="2">$ {{ montoEfectivoCPD }}</td>
+                        </tr>
+                        <tr class="table-dark">
+                            <th></th>
+                            <th>Vendedor</th>
+                            <th>Comprador</th>
+                        </tr>
+
+                        <tr>
+                            <th>Gastos de Negociación</th>
+                            <td>-$ {{ gastosNegociacion.vendedor }}
+                                <br>
+                                <small class="text-muted">
+                                    - Derecho de Mercado $ {{ round(derechoMercado.vendedor) }}
+                                    <br>
+                                    - Arancel BYMA Agente $ {{ round(importeArancelAgenteByma) }}
+                                    <br>
+                                    - Derecho de Listado $ {{ round(derechoListado) }} (0.03% Importe Nominal del CPD)
+
+                                </small>
+                            </td>
+                            <td>-$ {{ gastosNegociacion.comprador }}
+                                <br>
+                                <small class="text-muted">
+                                    + Derecho de Mercado ${{ Math.round(derechoMercado.comprador * 100) / 100 }}
+                                    ({{ TASA_DERECHO_MERCADO_VENTA * 100 }} %
+                                    sobre el valor efectivo del CPD, prorrateable por hasta 90 días)
+                                    <br>+ Arancel Agente BYMA ${{ Math.round(importeArancelAgenteByma * 100) / 100 }} ({{
+                                        porcArancelAgenteByma }}% anual sobre el valor nominal del CPD)
+                                </small>
+                            </td>
+                        </tr>
+
+                        <tr class="table-danger">
+                            <th>IVA sobre G.negociación</th>
+                            <td>-$ {{ iva.vendedor }}</td>
+                            <td>-$ {{ iva.comprador }}</td>
+                        </tr>
+
+                        <tr class="table-warning" v-if="condicionIvaComprador != 3">
+                            <th>Perc. IVA</th>
+                            <td>-${{ round(percIVA) }}</td>
+                            <td></td>
+                        </tr>
+
+                        <tr v-if="condicionIvaComprador != 3">
+                            <th>Arancel Custodia Caja de Valores</th>
+                            <td></td>
+                            <td class="text-muted">0.25% anual prorratead por los días en custodia</td>
+                        </tr>
+
+                        <tr class="border-dark border-top border-2">
+                            <th>Neto a cobrar / pagar</th>
+                            <th>$ {{ round(importe.vendedor - percIVA) }}</th>
+                            <th>$ {{ importe.comprador }}</th>
+                        </tr>
+
+                        <tr class="table-warning" v-if="condicionIvaComprador != 3">
+                            <th>Recupero Perc. IVA</th>
+                            <td>${{ round(percIVA) }}</td>
+                            <td></td>
+                        </tr>
+
+                        <tr class="table-danger" v-if="condicionIvaComprador != 3">
+                            <th>Recupero IVA</th>
+                            <td>${{ round(iva.vendedor) }}</td>
+                            <td>${{ round(iva.comprador) }}</td>
+                        </tr>
+
+                        <tr class="table-success fw-bold border-dark border-top border-4">
+                            <th>Ingresos a cobrar / pagar</th>
+                            <td>$ {{ round(importe.vendedor + iva.vendedor) }}</td>
+                            <td>$ {{ round(importe.comprador + iva.comprador) }}</td>
+                        </tr>
+
+
+                        <tr>
+                            <th>TNAV incluyendo gastos e imp</th>
+                            <td>{{ tnavPorcConGastosImpuesto.vendedor }}%</td>
+                            <td>{{ tnavPorcConGastosImpuesto.comprador }} %</td>
+                        </tr>
+
+                        <tr>
+                            <th>Tasa efectiva del período:</th>
+                            <td>{{ tEfectivaDelPeriodo.vendedor }}%</td>
+                            <td>{{ tEfectivaDelPeriodo.comprador }}%</td>
+                        </tr>
+                        <tr>
+                            <th>Tasa efectiva anual equivalente:</th>
+                            <td>{{ teaEquivalente.vendedor }}%</td>
+                            <td>{{ teaEquivalente.comprador }}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
 
         <div class="row">
             <div class="col-12 col-md-4">
@@ -257,117 +374,6 @@ const teaEquivalente = computed(() => {
                     Math.round(importeADescontarSobreValorNominal / montoEfectivoCPD * 10000) / 100
                 }}%</td>
             </div>
-        </div>
-
-        <div class="row">
-
-            <div class="col-12">
-
-                <table class="table table-borderd">
-                    <thead>
-                        <tr class="table-dark">
-                            <th></th>
-                            <th>Vendedor</th>
-                            <th>Comprador</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="table-primary">
-                            <th>Bruto a cobrar / pagar </th>
-                            <td>$ {{ montoEfectivoCPD }}</td>
-                            <td>$ {{ montoEfectivoCPD }}</td>
-                        </tr>
-
-                        <tr class="table-danger">
-                            <th>Gastos de Negociación</th>
-                            <td>-$ {{ gastosNegociacion.vendedor }}
-                                <br>
-                                <small class="text-muted">
-                                    - Derecho de Mercado $ {{ round(derechoMercado.vendedor) }}
-                                    <br>
-                                    - Arancel BYMA Agente $ {{ round(importeArancelAgenteByma) }}
-                                    <br>
-                                    - Derecho de Listado $ {{ round(derechoListado) }} (0.03% Importe Nominal del CPD)
-
-                                </small>
-                            </td>
-                            <td>-$ {{ gastosNegociacion.comprador }}
-                                <br>
-                                <small class="text-muted">
-                                    + Derecho de Mercado ${{ Math.round(derechoMercado.comprador * 100) / 100 }}
-                                    ({{ TASA_DERECHO_MERCADO_VENTA * 100 }} %
-                                    sobre el valor efectivo del CPD, prorrateable por hasta 90 días)
-                                    <br>+ Arancel Agente BYMA ${{ Math.round(importeArancelAgenteByma * 100) / 100 }} ({{
-                                        porcArancelAgenteByma }}% anual sobre el valor nominal del CPD)
-                                </small>
-                            </td>
-                        </tr>
-
-                        <tr class="table-danger">
-                            <th>IVA sobre G.negociación</th>
-                            <td>-$ {{ iva.vendedor }}</td>
-                            <td>-$ {{ iva.comprador }}</td>
-                        </tr>
-
-                        <tr class="table-warning" v-if="condicionIvaComprador != 3">
-                            <th>Perc. IVA</th>
-                            <td>-${{ round(percIVA) }}</td>
-                            <td></td>
-                        </tr>
-
-                        <tr v-if="condicionIvaComprador != 3">
-                            <th>Arancel Custodia Caja de Valores</th>
-                            <td></td>
-                            <td class="text-muted">0.25% anual prorratead por los días en custodia</td>
-                        </tr>
-
-                        <tr class="border-dark border-top border-4">
-                            <th>Neto a cobrar / pagar</th>
-                            <td>$ {{ round(importe.vendedor - percIVA) }}
-
-                            </td>
-                            <td>$ {{ importe.comprador }}</td>
-                        </tr>
-
-                        <tr class="table-warning" v-if="condicionIvaComprador != 3">
-                            <th>Recupero Perc. IVA</th>
-                            <td>${{ round(percIVA) }}</td>
-                            <td></td>
-                        </tr>
-
-                        <tr class="table-danger" v-if="condicionIvaComprador != 3">
-                            <th>Recupero IVA</th>
-                            <td>${{ round(iva.vendedor) }}</td>
-                            <td>${{ round(iva.comprador) }}</td>
-                        </tr>
-
-                        <tr class="table-success fw-bold border-dark border-top border-4">
-                            <th>Ingresos a cobrar / pagar</th>
-                            <td>$ {{ round(importe.vendedor + iva.vendedor) }}</td>
-                            <td>$ {{ round(importe.comprador + iva.comprador) }}</td>
-                        </tr>
-
-
-                        <tr>
-                            <th>TNAV incluyendo gastos e imp</th>
-                            <td>{{ tnavPorcConGastosImpuesto.vendedor }}%</td>
-                            <td>{{ tnavPorcConGastosImpuesto.comprador }} %</td>
-                        </tr>
-
-                        <tr>
-                            <th>Tasa efectiva del período:</th>
-                            <td>{{ tEfectivaDelPeriodo.vendedor }}%</td>
-                            <td>{{ tEfectivaDelPeriodo.comprador }}%</td>
-                        </tr>
-                        <tr>
-                            <th>Tasa efectiva anual equivalente:</th>
-                            <td>{{ teaEquivalente.vendedor }}%</td>
-                            <td>{{ teaEquivalente.comprador }}%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
         </div>
     </div>
 </template>
