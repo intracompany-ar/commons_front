@@ -1,7 +1,11 @@
 <script setup>
+import { onMounted } from 'vue';
 import dayjs from 'dayjs'
 
-const model = defineModel({default: dayjs().format('YYYY-MM-DD')})
+const model = defineModel()
+onMounted(() => {
+    model.value = dayjs().format('YYYY-MM-DD')
+})
 
 const props = defineProps({
     id: { required: false, type: String, default: 'hasta' },
