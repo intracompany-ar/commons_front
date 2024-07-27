@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { tnaaToTnav, tnavToTnaa } from  './formulas';
+import { tnaaToTnav, tnavToTnaa } from  './../../utils/formulas';
 
 const tnav2 = ref(45);
 const tnaa = ref(45);
