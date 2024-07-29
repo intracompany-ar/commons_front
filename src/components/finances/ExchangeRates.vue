@@ -4,6 +4,7 @@ import ExchangeRateDetail from './ExchangeRateDetail.vue'
 
 const rowsMayorista = ref([])
 const rowsBlue = ref([])
+const rowsCcl = ref([])
 
 getRows();
 function getRows() {
@@ -11,6 +12,8 @@ function getRows() {
     let url = "https://mercados.ambito.com//dolar/mayorista/variacion";
 
     let urlBlue = 'https://mercados.ambito.com//dolar/informal/variacion';
+
+    let urlCcl = 'https://mercados.ambito.com//dolarrava/cl/variacion';
 
     // uso fetch, con axios no lo pude hacer funcionar, aparentemente es problema de headers
     fetch(url)
@@ -26,6 +29,13 @@ function getRows() {
             console.log(error)
         })
         .then(data => { rowsBlue.value = data ?? null; })
+
+    fetch(urlCcl)
+        .then(response => { return response.json() })
+        .catch(error => {
+            console.log(error)
+        })
+        .then(data => { rowsCcl.value = data ?? null; })
 }
 </script>
 
@@ -37,7 +47,9 @@ function getRows() {
         <div class="col-6 col-md-12">
             <ExchangeRateDetail v-if="rowsBlue" :data="rowsBlue">U$S Libre</ExchangeRateDetail>
         </div>
-        <small class="text-muter"><small>Fuente: Ámbito</small></small>
+        <div class="col-6 col-md-12">
+            <ExchangeRateDetail v-if="rowsCcl" :data="rowsCcl">U$S CCL</ExchangeRateDetail>
+        </div>
     </div>
     <!-- DOLARHOY.com pero yo preciso el nacion, no coincide con este -->
     <!-- <div><iframe
