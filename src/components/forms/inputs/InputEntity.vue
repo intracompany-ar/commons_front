@@ -1,12 +1,11 @@
 <script setup>
-    const emit = defineEmits(['update:modelValue']);
+const model = defineModel();
     
     const props = defineProps({
         id:{ required: false, type: String, default: 'entity_id' }, 
         name:{ required: false, type: String, default: 'entity_id' },
         small:{ required: false, type: Boolean, default: true },
         label:{ required: false, type: Boolean, default: true },
-        modelValue:{ required: false, type: [String, Number], default: '' },
         required:{ required: false, type: Boolean, default: false },
         readonly:{ required: false, type: Boolean, default: false }
     });
@@ -22,8 +21,7 @@
             v-bind:name="props.name"    
             v-bind:id="props.id" 
             placeholder="CUIT" 
-            v-bind:value="props.modelValue"
-            v-on:input="emit('update:modelValue', $event.target.value)"
+            v-bind:value="model"
             v-bind:required="props.required"
             v-bind:readonly="props.readonly"
         />
