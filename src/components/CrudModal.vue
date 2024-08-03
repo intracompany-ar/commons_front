@@ -16,6 +16,7 @@ const props = defineProps({
     parameterRouteName: { required: false, type: String, default: 'id' },
     parameterRouteValue: { required: false, type: Number, default: 0 },
 
+    params: { required: false, type: Object, default() { return {} } },
 
     // Requiere que una columna sea value id para que funcione el delete
     columnas: { required: true, type: Array },
@@ -55,7 +56,7 @@ onMounted(() => {
         
         tableCrud.value.resetRows();
         nextTick(() => { // Sino el getRows se ejecuta antes de la actualización del parámetro  parameterRouteValue
-            tableCrud.value.getRows();
+            tableCrud.value.getRows(props.params);
             tableCrud.value.resetInputs();// Para que setee valores fijos
         });
         console.debug('show modal standard');

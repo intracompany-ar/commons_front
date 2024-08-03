@@ -13,6 +13,7 @@ const modoEdit = ref(false)
 const father_id = ref(0)
 const rows = ref([])
 const tabla = ref(null)
+const paramsGet = ref({})
 
 const props = defineProps({
     id: { required: true, type: String }, // Tmb la uso para los id de la table
@@ -36,13 +37,15 @@ const props = defineProps({
 })
 
 defineExpose({ getRows, resetInputs, resetRows, destroyTable })
-function getRows() {
+function getRows(paramsGetParam = {}) {
+    paramsGet.value = paramsGetParam;
     let url = props.model;
     if (props.parameterRouteName) {
         url = url.replace(':' + props.parameterRouteName, props.parameterRouteValue)
             .replace('%3A' + props.parameterRouteName, props.parameterRouteValue);
     };
-    axios(url)
+
+    axios(url, { params: paramsGet.value })
         .then(response => {
             try {
                 rows.value = JSON.parse(response.data)
@@ -102,7 +105,7 @@ function store() {
     axios.post(props.model, formData)
         .then(() => {
             if (props.datatable && tabla && tabla.value) { tabla.value.destroy() }
-            getRows();
+            getRows(paramsGet.value);
             resetInputs()
         });
 }
@@ -121,7 +124,7 @@ function editRow() {
         .then(response => {
             storeAdvices.success('Actualizado');
             if (props.datatable && tabla && tabla.value) { tabla.value.destroy() }
-            getRows();
+            getRows(paramsGet.value);
             pasarAModoAdd();
         })
 }
@@ -133,7 +136,7 @@ function deleteRow(id) {
             .then(response => {
                 storeAdvices.success('Elemento eliminado');
                 if (props.datatable && tabla && tabla.value) { tabla.value.destroy() }
-                getRows();
+                getRows(paramsGet.value);
                 pasarAModoAdd();
             })
     }
