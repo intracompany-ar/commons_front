@@ -7,6 +7,7 @@ const tableCrud = ref(null);
 
 const props = defineProps({
     titulo: { required: true, type: String },
+    subtitle: { required: false, type: String },
     large: { required: false, type: Boolean, default: false },
 
     modalId: { required: true, type: String },//Tmb la uso para los id de la table
@@ -44,6 +45,7 @@ const parametersTableCrud = computed(() => ({
 
 const parametersModal = computed(() => ({
     titulo: props.titulo,
+    subtitle: props.subtitle,
     id: props.modalId,
     large: props.large
 }))

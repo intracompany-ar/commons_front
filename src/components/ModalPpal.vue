@@ -5,6 +5,7 @@ const props = defineProps({
     id: { required: true, type: String },
     large: { required: false, type: Boolean, default: false },
     titulo: { required: false, type: String, default: '' },
+    subtitle: { required: false, type: String, default: '' },
     dark: { required: false, type: Boolean, default: false },
     padding: { required: false, type: Number, default: 4 }
 });
@@ -30,6 +31,7 @@ const props = defineProps({
                                     <span class="loader"><i style="color: #d72f23"
                                             class="fa fa-cog fa-spin fa-fw"></i></span>
                                 </h3>
+                                <small class="text-muted">{{ props.subtitle }}</small>
                             </div>
                             <div class="col-2 text-end d-print-none" v-on:click="closeModals()">
                                 <i class="fas fa-times-circle fa-3x" style="cursor: pointer; color: #6a6c6a;"
