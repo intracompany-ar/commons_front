@@ -349,25 +349,27 @@ const teaEquivalente = computed(() => {
 
 
                 <table class="table table-borderd">
-                    <tr>
-                        <th>WACC / Tasa Descuento [%]</th>
-                        <td><input type="number" class="form-control" v-model="tasaDescuento"></td>
-                    </tr>
-                    <tr>
-
-                        <th>TIR</th>
-                        <td>{{ Math.round(tir([-1 * montoEfectivoCPD, (importeNominal / (1 + (tasaDescuento / 100) /
-                            DIAS_ANIO) **
-                            (diasAlVencimiento ))]) * 100) / 100 }}%
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>VAN</th>
-                        <td>{{ Math.round(100 * (montoEfectivoCPD - (importeNominal / (1 + (tasaDescuento / 100) /
-                            DIAS_ANIO) **
-                            (diasAlVencimiento )))) / 100 }}
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th>WACC / Tasa Descuento [%]</th>
+                            <td><input type="number" class="form-control" v-model="tasaDescuento"></td>
+                        </tr>
+                        <tr>
+    
+                            <th>TIR</th>
+                            <td>{{ Math.round(tir([-1 * montoEfectivoCPD, (importeNominal / (1 + (tasaDescuento / 100) /
+                                DIAS_ANIO) **
+                                (diasAlVencimiento ))]) * 100) / 100 }}%
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>VAN</th>
+                            <td>{{ Math.round(100 * (montoEfectivoCPD - (importeNominal / (1 + (tasaDescuento / 100) /
+                                DIAS_ANIO) **
+                                (diasAlVencimiento )))) / 100 }}
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
 
                 <td>Desc. sobre VN del CPD {{
