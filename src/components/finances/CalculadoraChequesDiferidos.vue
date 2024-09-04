@@ -329,22 +329,23 @@ const teaEquivalente = computed(() => {
                             <th>{{ diasAlVencimiento }}</th>
                         </tr>
                     </thead>
-                    <tr>
-                        <th>Flujos</th>
-                        <td>$ {{ montoEfectivoCPD }} </td>
-                        <td></td>
-                        <td>-${{ importeNominal }}</td>
-                    </tr>
-                    <tr>
-                        <th>Flujos</th>
-                        <td>$ {{ montoEfectivoCPD }} </td>
-                        <td></td>
-                        <td>-${{ Math.round(100 *
-                            importeNominal / (
-                                1 + (tasaDescuento / 100) / DIAS_ANIO) ** (diasAlVencimiento)) / 100
-                        }}</td>
-                    </tr>
-
+                    <tbody>
+                        <tr>
+                            <th>Flujos</th>
+                            <td>$ {{ montoEfectivoCPD }} </td>
+                            <td></td>
+                            <td>-${{ importeNominal }}</td>
+                        </tr>
+                        <tr>
+                            <th>Flujos</th>
+                            <td>$ {{ montoEfectivoCPD }} </td>
+                            <td></td>
+                            <td>-${{ Math.round(100 *
+                                importeNominal / (
+                                    1 + (tasaDescuento / 100) / DIAS_ANIO) ** (diasAlVencimiento)) / 100
+                            }}</td>
+                        </tr>
+                    </tbody>
                 </table>
 
 
@@ -372,9 +373,9 @@ const teaEquivalente = computed(() => {
                     </tbody>
                 </table>
 
-                <td>Desc. sobre VN del CPD {{
+                <div>Desc. sobre VN del CPD {{
                     Math.round(importeADescontarSobreValorNominal / montoEfectivoCPD * 10000) / 100
-                }}%</td>
+                }}%</div>
             </div>
         </div>
     </div>
