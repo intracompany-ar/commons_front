@@ -1,32 +1,47 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 
 const caso = ref('1');
-const varPricePorc = ref(0);
-const cmu0Porc = ref(0);
-const varCostCash = ref(0);
-const cmu0Cash = ref(0);
-const varPriceCash = ref(0);
-const varFixedCostCash = ref(0);
-const cmu1Cash = ref(0);
+
+// Contrubición Marginal Unitaria
+const cmu = reactive({
+    porc0: 0,
+    cash0: 0,
+    cash1: 0,
+})
+// Precio
+const price = reactive({
+    porc: 0,
+    cash: 0,
+})
+// Costo Variable Unitario
+const cvu = reactive({
+    porc: 0,
+    cash: 0,
+})
+
+const cf = reactive({
+    cash: 0,
+})
+
 const quantiy0 = ref(0);
 
 const termBase = computed(() => {
-    return -parseFloat(varPricePorc.value)
+    return -parseFloat(price.porc)
         /
-        (parseFloat(cmu0Porc.value) + parseFloat(varPricePorc.value));
+        (parseFloat(cmu.porc0) + parseFloat(price.porc));
 })
 
 const termCV = computed(() => {
-    return -(parseFloat(varPriceCash.value) - parseFloat(varCostCash.value))
+    return -(parseFloat(price.cash) - parseFloat(cvu.cash))
         /
-        (parseFloat(cmu0Cash.value) + parseFloat(varPriceCash.value) - parseFloat(varCostCash.value))
+        (parseFloat(cmu.cash0) + parseFloat(price.cash) - parseFloat(cvu.cash))
 })
 
 const termCF = computed(() => {
-    return parseFloat(varFixedCostCash.value)
+    return parseFloat(cf.cash)
         /
-        (parseFloat(cmu1Cash.value) * parseFloat(quantiy0.value));
+        (parseFloat(cmu.cash1) * parseFloat(quantiy0.value));
 })
 
 const mvePorc = computed(() => {
@@ -44,10 +59,8 @@ const mvePorc = computed(() => {
 
 
 <template>
-    <!-- MVE: Modificación de Ventas de Equilibrio -->
-    <div class="container mt-4">
-        <h3>Calculadora de Modificación de Ventas de Equilibrio (MVE)</h3>
-
+    <div class="container mt-4 bg-secondary bg-opacity-25 border rounded p-4">
+        <h3>Modificación de Ventas de Equilibrio (MVE)</h3>
 
         <div class="row">
             <div class="col-12">
@@ -75,22 +88,22 @@ const mvePorc = computed(() => {
         <div class="row">
 
             <div class="col-md-3 col-6" v-if="['1', '3'].includes(caso)">
-                <label for="">Variación de precio:</label>
+                <label for="">Variación de precio</label>
                 <div class="input-group">
                     <div class="input-group-text">
                         <span class="input-group-addon">%</span>
                     </div>
-                    <input type="number" class="form-control" min="-300" max="300" step="0.01" v-model="varPricePorc">
+                    <input type="number" class="form-control" min="-300" max="300" step="0.01" v-model="price.porc">
                 </div>
             </div>
 
             <div class="col-md-3 col-6" v-if="['1', '3'].includes(caso)">
-                <label for="">CMU Actual:</label>
+                <label for="">CMU Actual</label>
                 <div class="input-group">
                     <div class="input-group-text">
                         <span class="input-group-addon">%</span>
                     </div>
-                    <input type="number" class="form-control" min="-300" max="300" step="0.01" v-model="cmu0Porc">
+                    <input type="number" class="form-control" min="-300" max="300" step="0.01" v-model="cmu.porc0">
                     <div class="form-text">Contribución Marginal Unitaria Actual [% respecto al precio actual]</div>
                 </div>
             </div>
@@ -99,67 +112,67 @@ const mvePorc = computed(() => {
 
 
             <div class="col-md-3 col-6" v-if="['2', '4'].includes(caso)">
-                <label for="">Var. Precio:</label>
+                <label for="">Var. Precio</label>
                 <div class="input-group">
                     <div class="input-group-text">
                         <span class="input-group-addon">$</span>
                     </div>
                     <input type="number" class="form-control" min="-999999999" max="999999999" step="0.01"
-                        v-model="varPriceCash">
+                        v-model="price.cash">
                 </div>
                 <div class="form-text">Variación del precio</div>
             </div>
 
             <div class="col-md-3 col-6" v-if="['2', '4'].includes(caso)">
-                <label for="">Var. CV:</label>
+                <label for="">Var. CV</label>
                 <div class="input-group">
                     <div class="input-group-text">
                         <span class="input-group-addon">$</span>
                     </div>
                     <input type="number" class="form-control" min="-999999999" max="999999999" step="0.01"
-                        v-model="varCostCash">
+                        v-model="cvu.cash">
                 </div>
                 <div class="form-text">Variación del Costo Variable</div>
             </div>
 
             <div class="col-md-3 col-6" v-if="['2', '4'].includes(caso)">
-                <label for="">CMU Actual:</label>
+                <label for="">CMU Actual</label>
                 <div class="input-group">
                     <div class="input-group-text">
                         <span class="input-group-addon">$</span>
                     </div>
                     <input type="number" class="form-control" min="-999999999" max="999999999" step="0.01"
-                        v-model="cmu0Cash">
+                        v-model="cmu.cash0">
                 </div>
                 <div class="form-text">Contribución Marginal Unitaria Actual</div>
             </div>
 
             <div class="col-md-3 col-6" v-if="['3', '4'].includes(caso)">
-                <label for="">Variación de CF:</label>
+                <label for="">Variación de CF</label>
                 <div class="input-group">
                     <div class="input-group-text">
                         <span class="input-group-addon">$</span>
                     </div>
                     <input type="number" class="form-control" min="-999999999" max="999999999" step="0.01"
-                        v-model="varFixedCostCash">
+                        v-model="cf.cash">
                 </div>
                 <div class="form-text">Variación de Costos Fijos</div>
             </div>
 
             <div class="col-md-3 col-6" v-if="['3', '4'].includes(caso)">
-                <label for="">Nueva CMU:</label>
+                <label for="">Nueva CMU</label>
                 <div class="input-group">
                     <div class="input-group-text">
                         <span class="input-group-addon">$</span>
                     </div>
                     <input type="number" class="form-control" min="-999999999" max="999999999" step="0.01"
-                        v-model="cmu1Cash">
+                        v-model="cmu.cash1">
                 </div>
                 <div class="form-text">Contribución Marginal Unitaria luego de aplicar la variación de CF </div>
             </div>
 
             <div class="col-md-3 col-6" v-if="['3', '4'].includes(caso)">
-                <label for="">Ventas Actuales:</label>
+                <label for="">Ventas Actuales</label>
                 <div class="input-group">
                     <div class="input-group-text">
                         <span class="input-group-addon">Unid.</span>
