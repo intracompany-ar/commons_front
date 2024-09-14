@@ -8,7 +8,6 @@ const tableCrud = ref(null);
 const props = defineProps({
     titulo: { required: true, type: String },
     subtitle: { required: false, type: String },
-    large: { required: false, type: Boolean, default: false },
 
     modalId: { required: true, type: String },//Tmb la uso para los id de la table
 
@@ -21,12 +20,14 @@ const props = defineProps({
 
     // Requiere que una columna sea value id para que funcione el delete
     columnas: { required: true, type: Array },
-    datatable: { required: false, type: Boolean, default: false },
     selectOptions: { required: false, type: [Array, Object], default() { return [] } },
     fatherField: { required: false, type: String, default: '' },
 
     config: { required: false, type: Object, default() { return {
-        api: false
+        api: false,
+        show: false,
+        large: false,
+        datatable: false
     } } }
 
 })
@@ -36,7 +37,7 @@ const parametersTableCrud = computed(() => ({
     parameterRouteName: props.parameterRouteName,
     parameterRouteValue: props.parameterRouteValue,
     columnas: props.columnas,
-    datatable: props.datatable,
+    datatable: props.config.datatable,
     selectOptions: props.selectOptions,
     fatherField: props.fatherField,
     id: props.modalId,
@@ -47,7 +48,7 @@ const parametersModal = computed(() => ({
     titulo: props.titulo,
     subtitle: props.subtitle,
     id: props.modalId,
-    large: props.large
+    large: props.config.large
 }))
 
 onMounted(() => {
