@@ -2,52 +2,64 @@
 import { ref } from 'vue'
 import ExchangeRateDetail from './ExchangeRateDetail.vue'
 
+const props = defineProps({
+    ussBlue: { type: Boolean, default: true },
+    ussCcl: { type: Boolean, default: true },
+    ussMayorista: { type: Boolean, default: true },
+});
+
 const rowsMayorista = ref([])
 const rowsBlue = ref([])
 const rowsCcl = ref([])
 
 getRows();
 function getRows() {
-    // var url = "https://mercados.ambito.com//dolar/oficial/variacion";
-    let url = "https://mercados.ambito.com//dolar/mayorista/variacion";
 
-    let urlBlue = 'https://mercados.ambito.com//dolar/informal/variacion';
+    if(props.ussBlue) {
+        let urlBlue = 'https://mercados.ambito.com//dolar/informal/variacion';
+        fetch(urlBlue)
+            .then(response => { return response.json() })
+            .catch(error => {
+                console.log(error)
+            })
+            .then(data => { rowsBlue.value = data ?? null; })
+    }
+    
+    if(props.ussCcl) {
+        let urlCcl = 'https://mercados.ambito.com//dolarrava/cl/variacion';
+        fetch(urlCcl)
+            .then(response => { return response.json() })
+            .catch(error => {
+                console.log(error)
+            })
+            .then(data => { rowsCcl.value = data ?? null; })
+    }
 
-    let urlCcl = 'https://mercados.ambito.com//dolarrava/cl/variacion';
+    if(props.ussMayorista) {
+        // var url = "https://mercados.ambito.com//dolar/oficial/variacion";
+        let url = "https://mercados.ambito.com//dolar/mayorista/variacion";
+        // uso fetch, con axios no lo pude hacer funcionar, aparentemente es problema de headers
+        fetch(url)
+            .then(response => { return response.json() })
+            .catch(error => {
+                console.log(error)
+            })
+            .then(data => { rowsMayorista.value = data ?? null; })
+    }
 
-    // uso fetch, con axios no lo pude hacer funcionar, aparentemente es problema de headers
-    fetch(url)
-        .then(response => { return response.json() })
-        .catch(error => {
-            console.log(error)
-        })
-        .then(data => { rowsMayorista.value = data ?? null; })
 
-    fetch(urlBlue)
-        .then(response => { return response.json() })
-        .catch(error => {
-            console.log(error)
-        })
-        .then(data => { rowsBlue.value = data ?? null; })
-
-    fetch(urlCcl)
-        .then(response => { return response.json() })
-        .catch(error => {
-            console.log(error)
-        })
-        .then(data => { rowsCcl.value = data ?? null; })
 }
 </script>
 
 <template>
     <div class="row mx-0 p-1">
-        <div class="col-6 col-md-12">
+        <div class="col-6 col-md-12" v-if="props.ussMayorista">
             <ExchangeRateDetail v-if="rowsMayorista" :data="rowsMayorista">U$S Mayorista</ExchangeRateDetail>
         </div>
-        <div class="col-6 col-md-12">
+        <div class="col-6 col-md-12" v-if="props.ussBlue">
             <ExchangeRateDetail v-if="rowsBlue" :data="rowsBlue">U$S Libre</ExchangeRateDetail>
         </div>
-        <div class="col-6 col-md-12">
+        <div class="col-6 col-md-12" v-if="props.ussCcl">
             <ExchangeRateDetail v-if="rowsCcl" :data="rowsCcl">U$S CCL</ExchangeRateDetail>
         </div>
     </div>
