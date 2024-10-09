@@ -37,3 +37,7 @@ export const personFirstName = document.head.querySelector('meta[name="person-fi
 export const profilePhoto = document.head.querySelector('meta[name="profile-photo"]')
     ? document.head.querySelector('meta[name="profile-photo"]').content
     : null;
+
+export const actualizopassw = document.head.querySelector('meta[name="actualizopassw"]')
+    ? document.head.querySelector('meta[name="actualizopassw"]').content
+    : null;
