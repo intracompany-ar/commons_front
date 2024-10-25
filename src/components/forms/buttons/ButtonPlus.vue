@@ -21,6 +21,7 @@ const props = defineProps({
 <style scoped>
 .plus-icon {
     cursor: pointer;
-    color: rgb(106, 108, 106);
+    color: rgb(39, 80, 155);
+    
 }
 </style>

@@ -7,6 +7,7 @@ export * from './src/defaults/datatable.js';
 export * from './src/components/component_mounter.js';
 
 export { default as ButtonPlus } from './src/components/forms/buttons/ButtonPlus.vue';
+export { default as ButtonSearch } from './src/components/forms/buttons/ButtonSearch.vue';
 export { default as ButtonSubmit } from './src/components/forms/buttons/ButtonSubmit.vue';
 export { default as RowButtonSubmit } from './src/components/forms/buttons/RowButtonSubmit.vue';
 export { default as ButtonChat } from './src/components/forms/buttons/ButtonChat.vue';
