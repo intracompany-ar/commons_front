@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useStoreAdvices } from '../../stores/store_advices';
-import { csrf } from '../../utils/metas';
 import Method from './inputs/Method.vue';
 const storeAdvices = useStoreAdvices()
 const emit = defineEmits(['deleted']);
@@ -63,7 +62,6 @@ function submitForm() {
 
             <div v-if="!isAsync">
                 <Method method="DELETE" />
-                <input type="hidden" name="_token" v-model="csrf" />
             </div>
 
             <a v-if="props.urledit" v-bind:href="urledit2">
