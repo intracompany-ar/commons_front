@@ -1,5 +1,4 @@
 export * from './src/utils/validation.js';// Agregar el .js, sino en proyectos con ts, busca el validation.ts y da error not found
-export * from './src/utils/metas.js';
 export * from './src/utils/formulas.js';
 export * from './src/utils/dom.js';
 export * from './src/stores/store_advices.js';
