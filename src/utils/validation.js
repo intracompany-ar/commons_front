@@ -6,15 +6,15 @@ export function isEmail(text) {
     return REG_EXP_MAIL.test(String(text).toLowerCase());
 };
 
-export function validarEntityId(EntityIdNoValidado) {
-    EntityIdNoValidado = EntityIdNoValidado.toString();
-    // console.log('EntityIdNoValidado', EntityIdNoValidado);
-    let EntityIdSoloNumeros = EntityIdNoValidado.replace(REG_EXP_DIFFERENT_OF_NUMBER, '');
-    // console.log('EntityIdSoloNumeros1', EntityIdSoloNumeros);
-    if (EntityIdSoloNumeros.length != 11) { return false };
+export function validarTributaryId(TributaryIdNoValidado) {
+    TributaryIdNoValidado = TributaryIdNoValidado.toString();
+    // console.log('TributaryIdNoValidado', TributaryIdNoValidado);
+    let TributaryIdSoloNumeros = TributaryIdNoValidado.replace(REG_EXP_DIFFERENT_OF_NUMBER, '');
+    // console.log('TributaryIdSoloNumeros1', TributaryIdSoloNumeros);
+    if (TributaryIdSoloNumeros.length != 11) { return false };
 
     let acumulado = 0;
-    let arrayDigitos = EntityIdSoloNumeros.split("");
+    let arrayDigitos = TributaryIdSoloNumeros.split("");
     let ultimoDigito = arrayDigitos.pop(); // elimina el último elemento y lo retorna
 
     arrayDigitos.forEach((element, key) => {
@@ -38,13 +38,13 @@ export function isJson(str) {
 }
 
 /**
- * A partir de un tipo entidad y un dni calcula el EntityId
+ * A partir de un tipo entidad y un dni calcula el TributaryId
  * 
  * @param string,integer dni
  * @param string tipoEntidadParam  20, 30 por ejemplo
- * @return integer  NroEntityId
+ * @return integer  NroTributaryId
  */
-export function calculateEntityIdFromDni(doc, kind) {
+export function calculateTributaryIdFromDni(doc, kind) {
     if (!['M', 'F', 'E'].includes(kind)) { return false; }
     let prefix = kind === 'M' ? '20' : kind === 'F' ? '27' : '30'
 

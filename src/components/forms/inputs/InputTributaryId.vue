@@ -2,8 +2,8 @@
 const model = defineModel();
 
 const props = defineProps({
-    id:{ required: false, type: String, default: 'entity_id' }, 
-    name:{ required: false, type: String, default: 'entity_id' },
+    id:{ required: false, type: String, default: 'tributary_id' }, 
+    name:{ required: false, type: String, default: 'tributary_id' },
     small:{ required: false, type: Boolean, default: true },
     label:{ required: false, type: Boolean, default: true },
     required:{ required: false, type: Boolean, default: false },

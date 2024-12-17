@@ -4,7 +4,7 @@ import { isEmail } from '../../utils/validation';
 const emit = defineEmits(['editMail', 'editPhoneNumber'])
 const props = defineProps({
     name: { required: false, type: String, default: 'N/N' },
-    entity_id: { required: false, type: [String, Number], default: '' },
+    tributary_id: { required: false, type: [String, Number], default: '' },
     mail_address: { required: false, type: [Object, Array], default: [] },
     phoneNumber: { required: false, type: [Object, Array], default: [] },
     edit: { required: false, type: Boolean, default: false }
@@ -15,7 +15,7 @@ const props = defineProps({
     <div style="font-size: 0.8em;">
         {{ props.name }}
 
-        <span class="text-muted">({{ props.entity_id }})</span>
+        <span class="text-muted">({{ props.tributary_id }})</span>
 
         <div class="text-muted" v-if="props.mail_address">
             <div v-if="isEmail(props.mail_address.mail)">

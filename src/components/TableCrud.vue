@@ -172,14 +172,14 @@ function evaluarVariableString(row, valueAux) {
                 </td>
 
                 <td>
-                    <a href="#" v-on:click.prevent="store" class="btn btn-secondary" v-show="!modoEdit">
+                    <a href="#" v-on:click.prevent="store" class="btn btn-success" v-show="!modoEdit">
                         <i class="fas fa-save"></i></a>
 
-                    <a href="#" v-on:click.prevent="editRow" class="btn btn-secondary btn-sm"
+                    <a href="#" v-on:click.prevent="editRow" class="btn btn-success btn-sm"
                         v-show="modoEdit">
                         <i class="far fa-edit"></i></a>
 
-                    <a href="#" v-on:click.prevent="pasarAModoAdd()" class="btn btn-primary btn-sm"
+                    <a href="#" v-on:click.prevent="pasarAModoAdd()" class="btn btn-danger btn-sm"
                         v-show="modoEdit">
                         <i class="fas fa-times"></i></a>
                 </td>

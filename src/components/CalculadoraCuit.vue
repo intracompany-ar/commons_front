@@ -61,8 +61,8 @@
         };
 
 
-        let entity_id = xyInicial+document.value+verificador;
-        emit('calculated', entity_id);
+        let tributaryId = xyInicial+document.value+verificador;
+        emit('calculated', tributaryId);
     }
 </script>
 
