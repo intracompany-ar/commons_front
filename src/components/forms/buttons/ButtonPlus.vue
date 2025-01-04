@@ -9,7 +9,11 @@ const props = defineProps({
     modal: { required: false, type: Boolean, default: false }
 })
 
-const isExternalLink = computed(() => props.link?.startsWith('http'));
+function isString(value) {
+    return typeof value === "string";
+}
+
+const isExternalLink = computed(() => isString(props.link) ? props.link.startsWith('http') : false);
 const isModal = computed(() => props.modal && props.link);
 </script>
 
