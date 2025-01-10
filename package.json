@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@intracompany/commons_front",
-  "version": "1.0.83",
+  "version": "1.0.84",
   "description": "Archivos compartidos frontend",
   "main": "index.js",
   "files": [
