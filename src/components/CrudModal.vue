@@ -24,7 +24,6 @@ const props = defineProps({
     fatherField: { required: false, type: String, default: '' },
 
     config: { required: false, type: Object, default() { return {
-        api: false,
         show: false,
         large: false,
         datatable: false

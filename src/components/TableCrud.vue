@@ -9,6 +9,8 @@ $.extend(true, $.fn.dataTable.defaults, configDefaultDatatable);
 const storeAdvices = useStoreAdvices()
 const emit = defineEmits(['openModalShow']);
 
+const RANDOM_ID = Math.round(Math.random() * 10000000);
+
 const modoEdit = ref(false)
 const father_id = ref(0)
 const rows = ref([])
@@ -53,7 +55,10 @@ function getRows(paramsGetParam = {}) {
                 rows.value = response.data
             }
         })
-        .then(() => { if (props.datatable && tabla) { tabla.value = $('#table_' + props.id).DataTable({ buttons: [] }) } })
+        .then(() => { 
+            if (props.datatable && tabla) { 
+            tabla.value = $('#table_' + props.id + RANDOM_ID).DataTable({ buttons: [] }) 
+        } })
 }
 
 function resetRows() { rows.value = [] }
@@ -149,7 +154,7 @@ function evaluarVariableString(row, valueAux) {
 </script>
 
 <template>
-    <table :id="'table_' + props.id" class="table table-sm table-striped table-hover table-bordered compact"
+    <table :id="'table_' + props.id + RANDOM_ID" class="table table-sm table-striped table-hover table-bordered compact"
         width="100%" cellspacing="0" border="1">
         <thead>
             <tr>
