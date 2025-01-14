@@ -5,7 +5,7 @@ import { computed } from 'vue';
 
 const emit = defineEmits(['click']);
 const props = defineProps({
-    link: { required: false, type: String },
+    link: { required: false, type: [String, Object] },
     modal: { required: false, type: Boolean, default: false }
 })
 
