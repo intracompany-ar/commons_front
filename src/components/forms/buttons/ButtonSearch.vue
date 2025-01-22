@@ -13,22 +13,11 @@ const props = defineProps({
         <slot></slot>
     </button>
 
-    <div v-if="props.max > 0">
-        <small class="text-muted">
-            <!-- <a :href="document/', 'filas_limitadas')" target="_blank"> -->
-                (búsqueda limitada
-                <br>
-                a {{ props.max }} filas)
-                <i class="far fa-question-circle"></i>
-            <!-- </a> -->
-        </small>
-        <div v-if="props.countRows == props.max" class="alert alert-warning p-1" role="alert">
-            <small><small>
-                Se han alcanzado las {{ props.max }} filas, es probable que algunos registros no se estén mostrando. Se
-                recomienda acotar
-                el rango de búsqueda utilizando los filtros.
-            </small></small>
-        </div>
-
+    <div v-if="props.max > 0 && props.countRows == props.max" class="alert alert-warning p-1" role="alert">
+        <small><small>
+            Se han alcanzado las {{ props.max }} filas, es probable que algunos registros no se estén mostrando. Se
+            recomienda acotar
+            el rango de búsqueda utilizando los filtros.
+        </small></small>
     </div>
 </template>
