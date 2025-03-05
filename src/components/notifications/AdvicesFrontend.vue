@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useStoreAdvices } from './../../stores/store_advices';
-const storeAdvices = useStoreAdvices()
 
 const WITH_AUDIO = false;
 const optionToast = ref({ animation: true });
@@ -24,7 +23,10 @@ function ocultarAvisoBackEnd() {
     });
 }
 
+let storeAdvices = null;
+
 onMounted(() => {
+    storeAdvices = useStoreAdvices();
     storeAdvices.$onAction(({
         name, // name of the action
         store, // store instance, same as `someStore`
