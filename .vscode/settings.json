@@ -8,7 +8,6 @@
         "**/storage": true,
         "**/public": true,
         "**/*.lock": true
-        // ,"**/database/migrations/2100_10_29_163432_auxiliar.php": true
     },
     "files.exclude": {
         "**/.git": false,

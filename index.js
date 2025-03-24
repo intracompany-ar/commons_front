@@ -16,6 +16,8 @@ export { default as ButtonRefresh } from './src/components/forms/buttons/ButtonR
 export { default as LabelClienteNombreTributaryIdMail } from './src/components/forms/LabelClienteNombreTributaryIdMail.vue';
 export { default as FormEditDelete } from './src/components/forms/FormEditDelete.vue';
 
+export { default as SelectBase } from './src/components/forms/selects/SelectBase.vue';
+
 export { default as TextArea } from './src/components/forms/inputs/TextArea.vue';
 export { default as InputCrudImage } from './src/components/forms/inputs/InputCrudImage.vue';
 export { default as InputStandard } from './src/components/forms/inputs/InputStandard.vue';
