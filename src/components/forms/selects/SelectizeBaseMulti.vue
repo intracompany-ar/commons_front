@@ -9,7 +9,6 @@ const props = defineProps({
     id: {required: false, type: String, default: 'selectize-base'},
     config: {required: false, type: Object, default: {
         useIndex: false
-
     }},
 })
 
