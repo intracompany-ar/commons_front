@@ -17,6 +17,7 @@ export { default as LabelClienteNombreTributaryIdMail } from './src/components/f
 export { default as FormEditDelete } from './src/components/forms/FormEditDelete.vue';
 
 export { default as SelectBase } from './src/components/forms/selects/SelectBase.vue';
+export { default as SelectizeBase } from './src/components/forms/selects/SelectizeBase.vue';
 
 export { default as TextArea } from './src/components/forms/inputs/TextArea.vue';
 export { default as InputCrudImage } from './src/components/forms/inputs/InputCrudImage.vue';
