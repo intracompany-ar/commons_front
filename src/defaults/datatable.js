@@ -2,7 +2,12 @@ export const configDefaultDatatable =  {
     Serverside: false,
     processing: false,
     stateSave: true,
-    dom: 'Bpftilp',// l: cant de regi a mostrar, p: paginacion, t: tabla (encabezado), i: informacion(ej PAg1/14), r: processing element, f: buscador. https://datatables.net/reference/option/dom
+    layout:{
+        topStart: 'search',
+        topEnd: [ 'paging'],
+        bottomStart: ['info', 'pageLength'],
+        bottomEnd: ['paging']
+    },
     info: true, //https://datatables.net/reference/option/info (el que dice por eje pag 1/24)
     searching: true,//https://datatables.net/reference/option/searching
     paging: true,//https://datatables.net/reference/option/paging

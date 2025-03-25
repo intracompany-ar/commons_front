@@ -1,6 +1,6 @@
 // Hooks
 import { ref, nextTick } from 'vue'
-import { configDefaultDatatable } from 'commons_front'
+import { configDefaultDatatable } from './../defaults/datatable.js'
 import $ from 'jquery';
 import axios from 'axios';
 import 'datatables.net';
@@ -9,7 +9,11 @@ $.extend(true, $.fn.dataTable.defaults, configDefaultDatatable);
 // No agregar export async sino no arrance el seteo iniciar de rows y demás
 export function useFetchDatatable() {
     
-    const CONFIG_DEFAULTS = { buttons: [], select: false, dom: 'Bpftilp', callback: null, usePost: false, data: {}}
+    const CONFIG_DEFAULTS = { buttons: [], select: false, callback: null, usePost: false, data: {},
+
+    // dom: 'Bpftilp',   
+        
+    }
     const HEADER_DEFAULT = { Accept: 'application/json', 'Content-Type': 'application/json' }
     
     const rows = ref([])
@@ -80,7 +84,7 @@ export function useFetchDatatable() {
             stateSave: true,
             buttons: config.buttons ?? [],
             select: config.select ?? false,
-            dom: config.dom ?? 'Bpftilp',
+            // dom: config.dom ?? 'Bpftilp',
         })
     }
 
