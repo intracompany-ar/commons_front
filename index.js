@@ -59,6 +59,9 @@ export { default as LoaderError } from './src/components/LoaderError.vue';
 export { default as TableCrud } from './src/components/TableCrud.vue';
 export { default as CrudModal } from './src/components/CrudModal.vue';
 
+export { default as LayoutSimple } from './src/layouts/Simple.vue';
+export { default as LayoutGuest } from './src/layouts/Guest.vue';
+
 export { default as ConvertTasaImplicitaDescProntoPago } from './src/components/finances/ConvertTasaImplicitaDescProntoPago.vue';
 export { default as CalculadoraChequesDiferidos } from './src/components/finances/CalculadoraChequesDiferidos.vue';
 export { default as ConvertTasaAnticipadaVencida } from './src/components/finances/ConvertTasaAnticipadaVencida.vue';

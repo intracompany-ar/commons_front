@@ -1,19 +1,16 @@
 // Hooks
 import { ref, nextTick } from 'vue'
 import { configDefaultDatatable } from './../defaults/datatable.js'
-import $ from 'jquery';
 import axios from 'axios';
-import 'datatables.net';
-$.extend(true, $.fn.dataTable.defaults, configDefaultDatatable);
+import DataTable from 'datatables.net-dt';
 
 // No agregar export async sino no arrance el seteo iniciar de rows y demás
 export function useFetchDatatable() {
     
-    const CONFIG_DEFAULTS = { buttons: [], select: false, callback: null, usePost: false, data: {},
-
-    // dom: 'Bpftilp',   
-        
-    }
+    const CONFIG_DEFAULTS = { datatable: {
+        buttons: [], 
+        select: false
+    }, callback: null, usePost: false, data: {}}
     const HEADER_DEFAULT = { Accept: 'application/json', 'Content-Type': 'application/json' }
     
     const rows = ref([])
@@ -79,13 +76,20 @@ export function useFetchDatatable() {
      * @param {string} tableIdParam - The ID of the table to initialize.
      * @param {Object} config - Configuration object for the DataTable.
      */
-    function initializeDataTable(tableIdParam, config) {
-        dataTableTable.value = $('#' + tableIdParam).DataTable({
+    function initializeDataTable(tableIdParam, configDatatable) {
+
+        dataTableTable.value = new DataTable('#' + tableIdParam, {
             stateSave: true,
-            buttons: config.buttons ?? [],
-            select: config.select ?? false,
-            // dom: config.dom ?? 'Bpftilp',
-        })
+            buttons: configDatatable.buttons ?? [],
+            select: configDatatable.select ?? false,
+            ...configDefaultDatatable
+        });
+
+        // dataTableTable.value = $('#' + tableIdParam).DataTable({
+        //     stateSave: true,
+        //     buttons: config.buttons ?? [],
+        //     select: config.select ?? false,
+        // })
     }
 
     function resetDataTable() {
