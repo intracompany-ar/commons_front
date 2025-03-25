@@ -32,7 +32,7 @@
     "@selectize/selectize": "^0.15.2",
     "axios": "^1.6.5",
     "bootstrap": "^5",
-    "datatables.net": "^1.13.8",
+    "datatables.net": "^1.13.11",
     "dayjs": "^1.11.13",
     "jquery": "^3.7.1",
     "pinia": "^2.1.7",

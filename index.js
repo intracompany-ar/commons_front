@@ -47,6 +47,8 @@ export { default as CalculadoraCuit } from './src/components/CalculadoraCuit.vue
 export { default as CalculadoraMarkUps } from './src/components/CalculadoraMarkUps.vue';
 export { default as CalculadoraMVE } from './src/components/CalculadoraMVE.vue';
 export { default as ModalPpal } from './src/components/ModalPpal.vue';
+export { default as CrudModalTree } from './src/components/layouts/CrudModalTree.vue';
+
 export { default as ShowCalificacionTributaryId } from './src/components/ShowCalificacionTributaryId.vue';
 export { default as Loader } from './src/components/Loader.vue';
 export { default as LoaderError } from './src/components/LoaderError.vue';
@@ -61,4 +63,8 @@ export { default as ExchangeRates } from './src/components/finances/ExchangeRate
 
 export { default as notificationSound } from './src/audio/notification.mp3';
 
+
 export { useFetch } from './src/composables/useFetch.ts';
+export { useFetchDatatable } from './src/composables/useFetchDatatable.ts';
+export { useBlob } from './src/composables/useBlob.js';
+export { destroy } from './src/composables/useDestroy.ts';

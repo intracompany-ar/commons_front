@@ -1,4 +1,3 @@
-
 export const configDefaultDatatable =  {
     Serverside: false,
     processing: false,
