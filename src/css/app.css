@@ -1,0 +1,120 @@
+@import "./_corporate_colors.css";
+
+/* Para que funcione Geogtq, es la que usa fate.com.ar. En lugar de secure_url deberia usar asset, pero en producción no se por qué toma http */
+@font-face {
+    font-family: 'Geogtq-Md';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Geogtq-Md'), local('Geogtq-Md'), url('fonts/Geogtq-Md.otf') format('opentype');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;/*@*/
+}
+
+[x-cloak] {
+    display: none;
+}
+
+/* BUTTONS */
+.btn-iceo {
+    text-transform: uppercase;
+    border-radius: 2.5em;
+    min-width: 10em;
+    font-weight: 700;
+    border: 0;
+}
+
+.btn-iceo.alt {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 2px #666;
+    color: #666 !important;
+}
+
+
+#banner-login {
+    background-color: var(--Michelin-grismuyoscuro);
+    color: var(--Michelin-azulclaro);
+    background-attachment: fixed;
+    background-image: url("/img/img_banners/banner_neumaticos.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.bg-iceo {
+    background: linear-gradient(to top, #F7FAFC, #e0e3dc, #F7FAFC)
+}
+
+.bg-iceo-2 {
+    background: linear-gradient(to top, rgba(108, 117, 125, 0.25), #F7FAFC )
+}
+.bg-iceo-primary {
+    background: linear-gradient(to top, #114c5f, #F7FAFC )
+}
+
+
+.bg-iceo-horizontal-3 {
+    background: linear-gradient(to right, #F7FAFC, #e0e3dc, #F7FAFC)
+}
+
+.bg-iceo-horizontal {
+    background: linear-gradient(to right, rgba(108, 117, 125, 0.25), #F7FAFC)
+}
+
+.bg-iceo-horizontal-inv {
+    background: linear-gradient(to right, #F7FAFC, rgba(108, 117, 125, 0.25))
+}
+
+/**
+ * FORMS
+ */
+label {
+    color: var(--Fate-rojogastado);
+}
+
+/* Colores para la validez del formulario */
+/* // input:valid, textarea:valid {  } */
+input:invalid,
+textarea:invalid {
+    background-color: var(--input-textarea-requiredbackground);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--Fate-rojogastado);
+    box-shadow: 0px 0px 0px 1px rgb(210, 12, 22);
+}
+
+.nav-item .nav-link {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nav-item.nav-link.active {
+    background-color: var(--Fate-rojogastado);
+}
+
+.borde_derecho_rojo {
+    border-right: 3px solid red !important;
+}
+
+/* Bootstrap tiene esta propiedad en none entonces falla el modal-dialog de editchart de google. Lo pongo en auto */
+.modal-dialog {
+    pointer-events: auto !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.list-group-item.active {
+    background-color: var(--Fate-rojogastado);
+    border-color: var(--Fate-rojogastado);
+}

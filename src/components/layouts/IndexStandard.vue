@@ -4,7 +4,7 @@ import { useFetchDatatable } from './../../../src/composables/useFetchDatatable'
 import FilterStandard from './../forms/FilterStandard.vue'
 import TableStandard from './../TableStandard.vue'
 import AdviceNoRecordsToShow from './../AdviceNoRecordsToShow.vue'
-import { get } from 'lodash'
+import get from 'lodash/get';
 const { rows, setRows } = useFetchDatatable()
 
 const props = defineProps(["model", 'columns', 'rowTitle', 'textValue', 'canCrud']);
