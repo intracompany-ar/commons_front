@@ -1,6 +1,6 @@
 // Hooks
 import { ref, nextTick } from 'vue'
-import { configDefaultDatatable } from './../defaults/datatable.js';
+import { configDefaultDatatable } from 'commons_front'
 import $ from 'jquery';
 import axios from 'axios';
 import 'datatables.net';

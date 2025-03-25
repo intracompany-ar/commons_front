@@ -1,6 +1,8 @@
 export * from './src/utils/validation.js';// Agregar el .js, sino en proyectos con ts, busca el validation.ts y da error not found
 export * from './src/utils/formulas.js';
 export * from './src/utils/dom.js';
+export * from './src/utils/scriptLoader.js';
+
 export * from './src/stores/store_advices.js';
 export * from './src/defaults/datatable.js';
 export * from './src/components/component_mounter.js';
@@ -20,6 +22,7 @@ export { default as FilterStandard } from './src/components/forms/FilterStandard
 export { default as SelectBase } from './src/components/forms/selects/SelectBase.vue';
 export { default as SelectizeBase } from './src/components/forms/selects/SelectizeBase.vue';
 export { default as SelectizeBaseMulti } from './src/components/forms/selects/SelectizeBaseMulti.vue';
+export { default as SelectizeTags } from './src/components/forms/selects/SelectizeTags.vue';
 export { default as SelectBranchOffice } from './src/components/forms/selects/SelectBranchOffice.vue';
 
 
@@ -48,6 +51,7 @@ export { default as CalculadoraMarkUps } from './src/components/CalculadoraMarkU
 export { default as CalculadoraMVE } from './src/components/CalculadoraMVE.vue';
 export { default as ModalPpal } from './src/components/ModalPpal.vue';
 export { default as CrudModalTree } from './src/components/layouts/CrudModalTree.vue';
+export { default as IndexStandard } from './src/components/layouts/IndexStandard.vue';
 
 export { default as ShowCalificacionTributaryId } from './src/components/ShowCalificacionTributaryId.vue';
 export { default as Loader } from './src/components/Loader.vue';

@@ -3,8 +3,9 @@ import { ref } from 'vue'
 import { useStoreAdvices } from './../stores/store_advices'
 import { configDefaultDatatable } from './../defaults/datatable';
 import $ from 'jquery';
-import 'datatables.net';
-$.extend(true, $.fn.dataTable.defaults, configDefaultDatatable);
+// import 'datatables.net';
+import DataTable from 'datatables.net-bs5';
+// $.extend(true, $.fn.dataTable.defaults, configDefaultDatatable);
 
 const storeAdvices = useStoreAdvices()
 const emit = defineEmits(['openModalShow']);
@@ -57,7 +58,8 @@ function getRows(paramsGetParam = {}) {
         })
         .then(() => { 
             if (props.datatable && tabla) { 
-            tabla.value = $('#table_' + props.id + RANDOM_ID).DataTable({ buttons: [] }) 
+            // tabla.value = $('#table_' + props.id + RANDOM_ID).DataTable({ buttons: [] }) 
+            tabla.value = DataTable('#table_' + props.id + RANDOM_ID, { buttons: [] })
         } })
 }
 

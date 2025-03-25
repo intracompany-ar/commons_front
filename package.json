@@ -32,9 +32,13 @@
     "@selectize/selectize": "^0.15.2",
     "axios": "^1.6.5",
     "bootstrap": "^5",
-    "datatables.net": "^1.13.11",
+    "datatables.net": "^2.2.2",
+    "datatables.net-bs5": "^2.2.2",
+    "datatables.net-dt": "^2.2.2",
+    "datatables.net-vue3": "^3.0.4",
     "dayjs": "^1.11.13",
     "jquery": "^3.7.1",
+    "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "vue": "^3"
   }
