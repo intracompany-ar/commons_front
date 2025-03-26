@@ -33,7 +33,14 @@ export function useFetchDatatable() {
      */
     async function setRows(url, tableId = null, configParam = {}){
         
-        const config = { ...CONFIG_DEFAULTS, ...configParam }
+        const config = {
+            ...CONFIG_DEFAULTS,
+            ...configParam,
+            datatable: {
+                ...CONFIG_DEFAULTS.datatable,
+                ...(configParam.datatable ?? {})
+            }
+        }
         let headers = { ...HEADER_DEFAULT };
         
         if(config.noCache) headers['Cache-Control'] = 'no-cache';
@@ -51,15 +58,16 @@ export function useFetchDatatable() {
         }
 
         try {
-            const response = await axios(url, axiosConfig);
-
             resetDataTable();
+
+            const response = await axios(url, axiosConfig);
 
             rows.value = response.data;
 
             await nextTick(); // Ensure the DOM is updated
+            await nextTick(); // a veces hace falta otro para asegurar render completo
 
-            if (tableId) { initializeDataTable(tableId, config) } 
+            if (tableId) { initializeDataTable(tableId, config.datatable) } 
             
             if (typeof config.callback === 'function') { config.callback() }
 
@@ -76,28 +84,26 @@ export function useFetchDatatable() {
      * @param {string} tableIdParam - The ID of the table to initialize.
      * @param {Object} config - Configuration object for the DataTable.
      */
-    function initializeDataTable(tableIdParam, configDatatable) {
-
-        dataTableTable.value = new DataTable('#' + tableIdParam, {
+    function initializeDataTable(tableIdParam, configOptions) {
+        const tableOptions = {
             stateSave: true,
-            buttons: configDatatable.buttons ?? [],
-            select: configDatatable.select ?? false,
+            buttons: configOptions.buttons ?? [],
+            select: configOptions.select ?? false,
             ...configDefaultDatatable
-        });
+        }
 
-        // dataTableTable.value = $('#' + tableIdParam).DataTable({
-        //     stateSave: true,
-        //     buttons: config.buttons ?? [],
-        //     select: config.select ?? false,
-        // })
+        dataTableTable.value = new DataTable('#' + tableIdParam, tableOptions);
     }
 
     function resetDataTable() {
-        resetRows();
-        if (dataTableTable && dataTableTable.value) { 
-            dataTableTable.value.destroy();
+        console.debug('resetDataTable');
+        if (dataTableTable.value) {
+            console.debug('resetDataTable2');
+            dataTableTable.value.destroy(true); // 💥 Destruye completamente la instancia y remueve el DOM generado
             dataTableTable.value = null;
-        };
+        }
+        rows.value = []; // 🔄 Limpiar las filas visuales
+        console.debug('resetDataTable3', rows.value, dataTableTable.value);
     }
 
     function resetRows()

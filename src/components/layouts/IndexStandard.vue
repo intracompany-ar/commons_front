@@ -4,7 +4,6 @@ import { useFetchDatatable } from './../../../src/composables/useFetchDatatable'
 import FilterStandard from './../forms/FilterStandard.vue'
 import TableStandard from './../TableStandard.vue'
 import AdviceNoRecordsToShow from './../AdviceNoRecordsToShow.vue'
-import get from 'lodash/get';
 const { rows, setRows } = useFetchDatatable()
 
 const props = defineProps(["model", 'columns', 'rowTitle', 'textValue', 'canCrud']);
@@ -27,6 +26,12 @@ const heads = computed(() => {
 function getRows() { 
     setRows(props.model, 'table-' + props.model) 
 }
+
+function getValue(obj, path, defaultValue = '') {
+    return path.split('.').reduce((acc, part) => {
+        return acc && acc[part] !== undefined ? acc[part] : undefined;
+    }, obj) ?? defaultValue;
+}
 </script>
 
 <template>
@@ -41,7 +46,7 @@ function getRows() {
                         <!-- :class="{ 'table-danger': conditionTableDanger }"> -->
                         <td v-for="column in props.columns">
                             {{ column.value
-                                ? (row[column.value] ?? get(row, column.value, ''))
+                                ? (row[column.value] ?? getValue(row, column.value, ''))
                                 : (column.textValue ?? '') }}
                         </td>
                         <td v-if="props.canCrud && row.id">
