@@ -1,7 +1,8 @@
 <script setup>
 import {ref, watch} from 'vue'
 import axios from 'axios';
-import { disableSubmits, enableSubmits, useStoreAdvices } from 'commons_front'
+import { useStoreAdvices } from './../stores/store_advices'
+import { disableSubmits, enableSubmits } from './../utils/dom.js';
 import { useRoute, useRouter } from 'vue-router'
 const $route = useRoute();
 const $router = useRouter();
