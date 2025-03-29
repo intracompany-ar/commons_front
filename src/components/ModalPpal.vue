@@ -34,7 +34,7 @@ const props = defineProps({
                                 <small class="text-muted">{{ props.subtitle }}</small>
                             </div>
                             <div class="col-2 text-end d-print-none" v-on:click="closeModals()">
-                                <i class="fas fa-times-circle fa-3x" style="cursor: pointer; color: #6a6c6a;"
+                                <i class="fas fa-times-circle fa-3x" style="cursor: pointer; color: #d72f23;"
                                     data-bs-dismiss="modal" aria-label="Close"></i>
                             </div>
                         </div>

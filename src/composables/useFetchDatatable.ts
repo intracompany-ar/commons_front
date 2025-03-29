@@ -2,7 +2,17 @@
 import { ref, nextTick } from 'vue'
 import { configDefaultDatatable } from './../defaults/datatable.js'
 import axios from 'axios';
-import DataTable from 'datatables.net-dt';
+// import DataTable from 'datatables.net-dt';
+import DataTable from 'datatables.net-buttons-bs5' // incluye DataTable + buttons
+import jszip from 'jszip';
+import 'datatables.net-buttons-bs5';
+import 'datatables.net-buttons/js/buttons.html5.mjs';
+// import pdfmake from 'pdfmake';
+import pdfMake from 'pdfmake/build/pdfmake'
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+
+// Registrar las fuentes virtuales
+pdfMake.vfs = pdfFonts.vfs
 
 // No agregar export async sino no arrance el seteo iniciar de rows y demás
 export function useFetchDatatable() {
@@ -22,8 +32,8 @@ export function useFetchDatatable() {
      * @param {string} url - The URL to fetch data from.
      * @param {string} [tableId=''] - The ID of the table to populate.
      * @param {Object} [config={}] - Configuration object.
-     * @param {Array} [config.buttons=[]] - Buttons configuration for DataTable.
-     * @param {boolean} [config.select=false] - Enable row selection in DataTable.
+     * @param {Array} [config.datatable.buttons=[]] - Buttons configuration for DataTable.
+     * @param {boolean} [config.datatable.select=false] - Enable row selection in DataTable.
      * @param {string} [config.dom='Bpftilp'] - DOM structure for DataTable.
      * @param {function|null} [config.callback=null] - Callback function to execute after setting rows.
      * @param {boolean} [config.usePost=false] - Use POST method instead of GET.
@@ -85,13 +95,27 @@ export function useFetchDatatable() {
      * @param {Object} config - Configuration object for the DataTable.
      */
     function initializeDataTable(tableIdParam, configOptions) {
+        const buttons = configOptions.buttons ?? [];
+
+        // Si se incluye alguno de los botones html5, registramos jszip/pdfmake
+        const hasExcel = buttons.some(b => (typeof b === 'string' && b === 'excelHtml5') || (typeof b === 'object' && b.extend === 'excelHtml5'));
+        const hasPdf = buttons.some(b => (typeof b === 'string' && b === 'pdfHtml5') || (typeof b === 'object' && b.extend === 'pdfHtml5'));
+
+        if (hasExcel) {
+            console.debug('hasExcel', hasExcel);
+            DataTable.Buttons.jszip(jszip);
+            console.debug('hasExcel', DataTable.Buttons);
+        }
+        if (hasPdf && DataTable?.Buttons?.pdfMake) {
+            DataTable.Buttons.pdfMake(pdfMake);
+        }
+
         const tableOptions = {
             stateSave: true,
-            buttons: configOptions.buttons ?? [],
+            buttons,
             select: configOptions.select ?? false,
             ...configDefaultDatatable
         }
-
         dataTableTable.value = new DataTable('#' + tableIdParam, tableOptions);
     }
 

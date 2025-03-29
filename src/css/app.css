@@ -9,6 +9,8 @@
 /* import '/node_modules/datatables.net-dt/css/jquery.dataTables.min.css'; */
 @import '/node_modules/@selectize/selectize/dist/css/selectize.bootstrap5.css';
 /* // TODO: Analizar como importarlo sin vite donde lo necesite */
+@import url('datatables.net-bs5');
+@import url('datatables.net-buttons-bs5');
 
 [x-cloak] {
     display: none;

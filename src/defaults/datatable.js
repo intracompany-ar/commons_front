@@ -5,7 +5,7 @@ export const configDefaultDatatable =  {
     layout:{
         topStart: 'search',
         topEnd: [ 'paging'],
-        bottomStart: ['info', 'pageLength'],
+        bottomStart: ['info', 'pageLength', 'buttons'],
         bottomEnd: ['paging']
     },
     info: true, //https://datatables.net/reference/option/info (el que dice por eje pag 1/24)
