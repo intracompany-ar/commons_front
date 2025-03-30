@@ -50,7 +50,6 @@ export { default as ListBadgesFamilies } from './src/components/ListBadgesFamili
 export { default as TableStandard } from './src/components/TableStandard.vue';
 export { default as CalculadoraCuit } from './src/components/CalculadoraCuit.vue';
 export { default as CalculadoraMarkUps } from './src/components/CalculadoraMarkUps.vue';
-export { default as CalculadoraMVE } from './src/components/CalculadoraMVE.vue';
 export { default as ModalPpal } from './src/components/ModalPpal.vue';
 export { default as CrudModalTree } from './src/components/layouts/CrudModalTree.vue';
 export { default as IndexStandard } from './src/components/layouts/IndexStandard.vue';
