@@ -8,7 +8,8 @@ const props = defineProps({
     model: { type: String, required: true },
     id: {required: false, type: String, default: 'selectize-base'},
     config: {required: false, type: Object, default: {
-        useIndex: false
+        useIndex: false,
+        setOnDemand: false,
     }},
 })
 
@@ -16,6 +17,14 @@ const id = ref(props.id+'-'+Math.random().toString(36).substring(7));
 
 const rows = ref([]);
 onMounted(() => {
+    if(!setOnDemand.value) {
+        setSelectize();
+    }
+})
+
+defineExpose({ setSelectize })
+
+function setSelectize(){
     axios(props.model+(props.config.useIndex ? '': '/select'))
         .then(response => {
             rows.value = response.data;
@@ -37,7 +46,7 @@ onMounted(() => {
                 onChange: function(value) { model.value = value; }
             });
         })
-})
+}
 </script>
 
 

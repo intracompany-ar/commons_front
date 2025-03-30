@@ -40,10 +40,12 @@
     "dayjs": "^1.11.13",
     "jquery": "^3.7.1",
     "jquery-ui": "^1.14.1",
-    "jszip": "^3.10.1",
     "pdfmake": "^0.2.18",
     "pinia": "^2.1.7",
     "vue": "^3",
     "vue-router": "^4.5.0"
+  },
+  "peerDependencies": {
+    "jszip": "^3.10.1"
   }
 }
