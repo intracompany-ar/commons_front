@@ -9,7 +9,7 @@ import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
 // import pdfmake from 'pdfmake';
 import pdfMake from 'pdfmake/build/pdfmake'
-import pdfFonts from 'pdfmake/build/vfs_fonts'
+import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 
 // Registrar las fuentes virtuales
 pdfMake.vfs = pdfFonts.vfs
