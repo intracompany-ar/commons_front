@@ -4,7 +4,7 @@ import { configDefaultDatatable } from './../defaults/datatable.js'
 import axios from 'axios';
 // import DataTable from 'datatables.net-dt';
 import DataTable from 'datatables.net-buttons-bs5' // incluye DataTable + buttons
-import jszip from 'jszip';
+import * as jszip from 'jszip'
 import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
 // import pdfmake from 'pdfmake';
