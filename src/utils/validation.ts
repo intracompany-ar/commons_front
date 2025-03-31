@@ -41,6 +41,7 @@ export function isJson(str: string) {
     return true;
 }
 
+
 /**
  * A partir de un tipo entidad y un dni calcula el TributaryId
  * 

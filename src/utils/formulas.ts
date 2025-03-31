@@ -74,7 +74,6 @@ export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp
 }
 
 
-
 export function round(value: number, decimals = 2) {
     let factor = 10 ** decimals;
     let result = Math.round(value * factor) / factor;
@@ -140,7 +139,6 @@ export function tasaRecargada_to_tea(tasaRecargo: number, diasAlVencimiento: num
 
     return round((1 + tasaDiaria) ** DIAS_ANIO - 1, 12);
 }
-
 
 export function tir(cashFlows: Array<number>, iterations = 1000, tolerance = 0.00001) {
     const npv = (rate: number) => {
