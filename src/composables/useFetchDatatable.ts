@@ -7,12 +7,7 @@ import DataTable from 'datatables.net-buttons-bs5' // incluye DataTable + button
 import * as jszip from 'jszip'
 import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
-// import pdfmake from 'pdfmake';
-import * as pdfMake from 'pdfmake/build/pdfmake'
-import * as pdfFonts from 'pdfmake/build/vfs_fonts'
-
-// Registrar las fuentes virtuales
-pdfMake.vfs = pdfFonts.vfs
+import pdfMake from './../utils/pdfmakeconfig'
 
 // No agregar export async sino no arrance el seteo iniciar de rows y demás
 export function useFetchDatatable() {
