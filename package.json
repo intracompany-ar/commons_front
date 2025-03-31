@@ -3,7 +3,7 @@
   "name": "@intracompany/commons_front",
   "version": "1.0.111",
   "description": "Archivos compartidos frontend",
-  "main": "index.js",
+  "main": "index.ts",
   "files": [
     "src"
   ],
@@ -13,7 +13,7 @@
     "release": "npm version patch && npm publish && git push"
   },
   "exports": {
-    ".": "./index.js"
+    ".": "./index.ts"
   },
   "repository": {
     "type": "git",

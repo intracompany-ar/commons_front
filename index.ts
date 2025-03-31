@@ -2,10 +2,8 @@ export * from './src/utils/validation.js';// Agregar el .js, sino en proyectos c
 export * from './src/utils/formulas.js';
 export * from './src/utils/dom.js';
 export * from './src/utils/scriptLoader.js';
-export * from './src/utils/axiosConfig.js';
 
 export * from './src/stores/store_advices.js';
-export * from './src/stores/auth.js';
 export * from './src/defaults/datatable.js';
 export * from './src/components/component_mounter.js';
 
