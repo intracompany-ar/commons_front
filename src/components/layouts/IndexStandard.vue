@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 import { useFetchDatatable } from './../../../src/composables/useFetchDatatable'
 import FilterStandard from './../forms/FilterStandard.vue'

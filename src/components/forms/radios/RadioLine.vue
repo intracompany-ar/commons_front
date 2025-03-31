@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const RANDOM_NUMBER = Math.round(Math.random() * 10000000)
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps(

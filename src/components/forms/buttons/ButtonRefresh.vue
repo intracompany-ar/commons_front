@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const emit = defineEmits(['click']);
 const props = defineProps({
     link: { required: false, default: null, type: String },

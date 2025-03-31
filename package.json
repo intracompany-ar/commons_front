@@ -18,7 +18,7 @@
   "scripts": {
     "test": "test",
     "build": "tsc",
-    "release": "npm version patch && npm publish && git push"
+    "release": "npm run build && npm version patch && npm publish && git push"
   },
   "repository": {
     "type": "git",
@@ -36,7 +36,6 @@
   "homepage": "https://github.com/intracompany-ar/commons_front#readme",
   "dependencies": {
     "@selectize/selectize": "^0.15.2",
-    "axios": "^1.6.5",
     "bootstrap": "^5",
     "datatables.net": "^2.2.2",
     "datatables.net-bs5": "^2.2.2",
@@ -53,11 +52,15 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@types/bootstrap": "^5.2.10",
     "@types/datatables.net": "^1.10.28",
     "@types/datatables.net-select": "^1.2.10",
+    "@types/jquery": "^3.5.32",
+    "@types/sizzle": "^2.3.9",
     "typescript": "^5.8.2"
   },
   "peerDependencies": {
+    "axios": "^1.6",
     "jszip": "^3.10.1"
   }
 }

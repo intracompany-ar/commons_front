@@ -1,5 +1,5 @@
 <!-- SI ES MODAL: Link es el Id del modal, modal="true", onclick nada a menos que tenga que ejecutar algún script -->
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 
 

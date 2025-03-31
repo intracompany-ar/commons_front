@@ -1,4 +1,4 @@
-export function loadScript(src) {
+export function loadScript(src: string) {
     if (!document.querySelector(`script[src="${src}"]`)) {
         const script = document.createElement('script');
         script.defer = true;

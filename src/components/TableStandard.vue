@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
     id: { required: true, type: String },
     heads: { required: true, type: Array },

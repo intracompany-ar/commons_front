@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { watch, ref, onMounted } from 'vue'
 import '@selectize/selectize'
 

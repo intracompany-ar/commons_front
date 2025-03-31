@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { watch, onMounted } from 'vue'
 import { useFetch } from './../../../composables/useFetch.ts';
 const {rows, setRows} = useFetch();

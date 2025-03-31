@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { closeModals } from './../utils/dom'
 
 const props = defineProps({

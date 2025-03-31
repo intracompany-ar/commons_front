@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useStoreAdvices } from '../../../stores/store_advices'
 const storeAdvices = useStoreAdvices()
 

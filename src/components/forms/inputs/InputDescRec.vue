@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 
 const emit = defineEmits(['update:modelValue']);

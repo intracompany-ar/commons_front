@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
 
 import { tir, round, tnavToTnaa, tnaaToTnav, tnavToTndv, tasaRecargada_to_tnav, tasaRecargada_to_tea } from './../../utils/formulas';

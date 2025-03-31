@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, nextTick, computed } from 'vue'
 import ModalPpal from './ModalPpal.vue'
 import TableCrud from './TableCrud.vue'

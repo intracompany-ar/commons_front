@@ -1,10 +1,13 @@
+import axios from 'axios'
+import type { AxiosResponse, AxiosError } from 'axios'
+
 export function useBlob() {
     /**
      * url publica o firmada. Ejemplo https://cdn.iceo.ar/files/adsfasdf.png
      * @param {string} url
      * @param {string} name
      */
-    function downloadFront(url, name = 'download')
+    function downloadFront(url: string, name = 'download')
     {
         fetch(url)
             .then(res => res.blob())
@@ -21,42 +24,42 @@ export function useBlob() {
             })
     }
 
-    function showPdf(url, params = {}){
+    function showPdf(url:string, params = {}){
         getFile(url, 'application/pdf', false, null, params)
     }
 
-    function downloadXls(url){
+    function downloadXls(url:string){
         getFile(url, 'application/vnd.ms-excel', true)
     }
 
-    function downloadTxt(url, fileName = null, params = {}){
+    function downloadTxt(url:string, fileName = null, params = {}){
         getFile(url, 'text/plain', true, fileName, params)
     }
 
-    function download(fileId)
+    function download(fileId: number)
     {
         const url = `file/download/${fileId}`;
-        getFile(url, null, true, null);
+        getFile(url, undefined, true, null);
     }
 
-    function downloadUrlTemporalFile(temporal)
+    function downloadUrlTemporalFile(temporal:string)
     {
-        axios(`file/download/${temporal}`)
-            .then(response => {
+        axios.get<{ url: string }>(`file/download/${temporal}`)
+            .then((response: AxiosResponse<{ url: string }>) => {
                 const url = response.data.url; // URL temporal de S3
                 window.open(url, '_blank');
             })
-            .catch(error => console.error("Error al obtener la imagen:", error));
+            .catch((error: AxiosError) => console.error("Error al obtener la imagen:", error));
 
     }
     
-    function show(fileId)
+    function show(fileId: number)
     {
         const url = `file/showFile/${fileId}`;
-        getFile(url, null, false);
+        getFile(url, undefined, false);
     }
 
-    function getFile(url, typeHeader = null, download = false, fileName = null, params = {})
+    function getFile(url:string, typeHeader: string | undefined = undefined, download = false, fileName = null, params = {})
     {
         axios(url, {params: params, responseType: 'blob'})
             .then(response => {
@@ -83,7 +86,7 @@ export function useBlob() {
                     window.open(blobUrl, '_blank');  // Abre el archivo en una nueva pestaña
                 }
             })
-            .catch(error => { console.error('Error:', error); });
+            .catch((error) => { console.error('Error:', error); });
     }
 
     return { showPdf, show, download, downloadXls, downloadTxt, downloadUrlTemporalFile, downloadFront }

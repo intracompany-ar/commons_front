@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useStoreAdvices } from './../stores/store_advices'
 import { configDefaultDatatable } from './../defaults/datatable';

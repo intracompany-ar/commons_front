@@ -11,5 +11,5 @@
         "allowSyntheticDefaultImports": true,
         "skipLibCheck": true
     },
-    "include": ["src", "src/types/media.d.ts", "src/types/types.d.ts"]
+    "include": ["src", "src/types/media.d.ts", "src/types/types.d.ts", "src/shims-vue.d.ts"]
 }

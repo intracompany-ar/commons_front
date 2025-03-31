@@ -3,10 +3,16 @@ import dayjs from 'dayjs'
 
 const DIAS_ANIO = 365;
 
+interface Fila {
+    [key: string]: string | number | undefined;
+    plazo?: number;
+    pond?: number;
+}
+
 export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp') {
 
-    const filas = ref([]);
-    const fechabase = ref(null);
+    const filas = ref<Fila[]>([]);
+    const fechabase = ref<string | null>(null);
     /**
      * Suma de los importes de los pagos
      */
@@ -42,7 +48,7 @@ export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp
      * @param {array} filas [{fecha: '2023-01-01', importe: 5555}]
      * @param {string} baseDateParam Fecha base para calcular los días de plazo, es el promedio de facturas
      */
-    function calculate(filasParam, baseDateParam = null) {
+    function calculate(filasParam: Fila[], baseDateParam: string | null = null) {
         filas.value = filasParam;
         fechabase.value = baseDateParam ?? dayjs().format("YYYY-MM-DD");
 
@@ -55,7 +61,7 @@ export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp
                     element.plazo = element.plazo < 0 ? 0 : element.plazo;
 
                     // Ponderaciones
-                    let pond = element[keyAmountNane] / importeTotal.value;// Ponderación del cheque según importes (sobre total)
+                    let pond = Number(element[keyAmountNane]) / importeTotal.value;// Ponderación del cheque según importes (sobre total)
                     element.pond = Math.round(element.plazo * pond * 100) / 100;// Pond son los días de pago ponderados por lo que "pesa" el cheque
                 }
             })
@@ -69,10 +75,10 @@ export function promPonderadoDiasCobro(keyDateName = 'fec', keyAmountNane = 'imp
 
 
 
-export function round(value, decimals = 2) {
+export function round(value: number, decimals = 2) {
     let factor = 10 ** decimals;
     let result = Math.round(value * factor) / factor;
-    return isNaN(result) ? '' : parseFloat(result);
+    return isNaN(result) ? '' : parseFloat(result.toString());
 };
 
 /**
@@ -81,17 +87,17 @@ export function round(value, decimals = 2) {
  * @param {float} tnav con decimales, no porcentajes
  * @returns 
  */
-export function tnavToTnaa(tnav, days = 360, daysPerYear = 360) // retorna como indíce (no %) Tasa nominal anual vencia a adelantada
+export function tnavToTnaa(tnav: number, days = 360, daysPerYear = 360) // retorna como indíce (no %) Tasa nominal anual vencia a adelantada
 {
     let d = days / daysPerYear;
-    let tnavAdj = parseFloat(tnav) * d;
+    let tnavAdj = parseFloat(tnav.toString()) * d;
     return tnavAdj / (1 + tnavAdj);
 }
 
-export function tnaaToTnav(tnaa, days = 360, daysPerYear = 360) // retorna como indíce (no %)
+export function tnaaToTnav(tnaa: number, days = 360, daysPerYear = 360) // retorna como indíce (no %)
 {
     let d = days / daysPerYear;
-    let tnaaAdj = parseFloat(tnaa) * d;
+    let tnaaAdj = parseFloat(tnaa.toString()) * d;
     return tnaaAdj / (1 - tnaaAdj);
 };
 
@@ -101,12 +107,12 @@ export function tnaaToTnav(tnaa, days = 360, daysPerYear = 360) // retorna como 
  * @param {int} diasPorAnio 
  * @returns 
  */
-export function tnavToTndv(tnav, diasPorAnio = DIAS_ANIO)// diasPorAnio a veces usan 360
+export function tnavToTndv(tnav: number, diasPorAnio = DIAS_ANIO)// diasPorAnio a veces usan 360
 {
     return round(tnav / diasPorAnio, 12);
 };
 
-export function tasaRecargada_to_tnav(tasaRecargo, diasAlVencimiento, diasPorAnio = DIAS_ANIO)// diasPorAnio a veces usan 360
+export function tasaRecargada_to_tnav(tasaRecargo: number, diasAlVencimiento: number, diasPorAnio = DIAS_ANIO)// diasPorAnio a veces usan 360
 {
     let tnav = tasaRecargo / diasAlVencimiento * diasPorAnio;
     return round(tnav, 12);
@@ -119,26 +125,26 @@ export function tasaRecargada_to_tnav(tasaRecargo, diasAlVencimiento, diasPorAni
  * @param {int} cantidadCapitalizaciones PAra semanal: 52, diario: 365 o 360, mensual: 12
  * @returns float en porcentaje
  */
-export function tnaToTea(tna, cantidadCapitalizaciones = 12) {
+export function tnaToTea(tna: number, cantidadCapitalizaciones = 12) {
     let tasaNominalMensual = (tna / 100) / cantidadCapitalizaciones;
     return Math.round(((Math.pow((1 + tasaNominalMensual), cantidadCapitalizaciones) - 1)) * 10000) / 100
 }
-export function teaToTna(tea, cantidadCapitalizaciones = 12) {
+export function teaToTna(tea: number, cantidadCapitalizaciones = 12) {
     return Math.round( (Math.pow(tea / 100 + 1, 1 / cantidadCapitalizaciones) - 1) * cantidadCapitalizaciones * 10000) / 100
 }
 
-export function tasaRecargada_to_tea(tasaRecargo, diasAlVencimiento, diasPorAnio = DIAS_ANIO)// diasPorAnio a veces usan 360
+export function tasaRecargada_to_tea(tasaRecargo: number, diasAlVencimiento: number, diasPorAnio = DIAS_ANIO)// diasPorAnio a veces usan 360
 {
     // i *(1+x)^dias = f => (f/i)^(1/dias) -1 = x => x^365 = TEA
-    let tasaDiaria = parseFloat(tasaRecargo) ** (1 / parseFloat(diasAlVencimiento)) - 1;
+    let tasaDiaria = parseFloat(tasaRecargo.toString()) ** (1 / parseFloat(diasAlVencimiento.toString())) - 1;
 
     return round((1 + tasaDiaria) ** DIAS_ANIO - 1, 12);
 }
 
 
-export function tir(cashFlows, iterations = 1000, tolerance = 0.00001) {
-    const npv = (rate) => {
-        return cashFlows.reduce((acc, cashFlow, index) => {
+export function tir(cashFlows: Array<number>, iterations = 1000, tolerance = 0.00001) {
+    const npv = (rate: number) => {
+        return cashFlows.reduce((acc: number, cashFlow: number, index: number) => {
             return acc + cashFlow / Math.pow(1 + rate, index);
         }, 0);
     };

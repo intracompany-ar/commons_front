@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const emit = defineEmits(['click']);
 const props = defineProps({
     countRows: { required: false, type: Number, default: 0 },

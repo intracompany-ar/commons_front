@@ -1,5 +1,5 @@
 <!-- Este no lo estoy usando en ningún lado, no vale la pena, conviene poneer el input directamente con el csrf -->
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
 const csrf = ref(0);

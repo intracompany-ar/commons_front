@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { isEmail } from '../../utils/validation';
 
 const emit = defineEmits(['editMail', 'editPhoneNumber'])

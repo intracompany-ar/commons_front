@@ -3,28 +3,28 @@ import { Modal } from 'bootstrap'
 export function disableSubmits() {
     const submits = document.querySelectorAll('button[type="submit"]');
     submits.forEach((submit) => {
-        submit.disabled = true;
+        (submit as HTMLButtonElement).disabled = true;
     });
 }
 
 export function enableSubmits() {
     const submits = document.querySelectorAll('button[type="submit"]');
     submits.forEach((submit) => {
-        submit.disabled = false;
+        (submit as HTMLButtonElement).disabled = false;
     });
 }
 
 export function showLoaders() {
     const loaders = document.getElementsByClassName('loader');
     for (let i = 0; i < loaders.length; i++) {
-        loaders[i].style.visibility = 'visible';
+        (loaders[i] as HTMLElement).style.visibility = 'visible';
     }
 }
 
 export function hideLoaders() {
     const loaders = document.getElementsByClassName('loader');
     for (let i = 0; i < loaders.length; i++) {
-        loaders[i].style.visibility = 'hidden';
+        (loaders[i] as HTMLElement).style.visibility = 'hidden';
     }
 }
 
@@ -37,7 +37,7 @@ export function closeModals() {
     }
 }
 
-export function openModal(modalId) {
+export function openModal(modalId: string) {
     let element = document.getElementById(modalId);
     if (element) {
         let modal = new Modal(element);

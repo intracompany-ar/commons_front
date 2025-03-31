@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     import ButtonSubmit from './ButtonSubmit.vue'
     const props = defineProps({
         id:{ required: false, type: String, default: 'button_submit' },

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import {ref, watch} from 'vue'
 import axios from 'axios';
 import { useStoreAdvices } from './../stores/store_advices'

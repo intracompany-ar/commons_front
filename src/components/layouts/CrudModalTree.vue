@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { provide } from "vue";
 import ModalPpal from "./../ModalPpal.vue";
 import { openModal } from './../../../src/utils/dom.js'

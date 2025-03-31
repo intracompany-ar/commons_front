@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const emit = defineEmits(['input']);
 const props = defineProps({
     name: { required: true, type: String },

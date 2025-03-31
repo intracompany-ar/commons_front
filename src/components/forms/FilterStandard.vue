@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref, useSlots } from 'vue'
 import InputFechaHasta from './inputs/InputFechaHasta.vue';
 import InputFechaDesde from './inputs/InputFechaDesde.vue';

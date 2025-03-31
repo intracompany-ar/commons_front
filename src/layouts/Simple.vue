@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 </script>
 <template>
     <div class="container-fluid d-print-none" style="vertical-align: middle; background-color: #e0e3dc; color: #6a6c6a; ">

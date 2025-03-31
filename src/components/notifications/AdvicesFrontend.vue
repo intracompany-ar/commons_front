@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useStoreAdvices } from './../../stores/store_advices';
 
