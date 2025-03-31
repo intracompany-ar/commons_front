@@ -8,7 +8,7 @@ import * as jszip from 'jszip'
 import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
 // import pdfmake from 'pdfmake';
-import pdfMake from 'pdfmake/build/pdfmake'
+import * as pdfMake from 'pdfmake/build/pdfmake'
 import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 
 // Registrar las fuentes virtuales
