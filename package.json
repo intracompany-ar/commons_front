@@ -3,17 +3,22 @@
   "name": "@intracompany/commons_front",
   "version": "1.0.112",
   "description": "Archivos compartidos frontend",
-  "main": "index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "src"
   ],
   "scripts": {
     "test": "test",
-    "build": "echo 'Building commons_front...'",
+    "build": "tsc",
     "release": "npm version patch && npm publish && git push"
-  },
-  "exports": {
-    ".": "./index.ts"
   },
   "repository": {
     "type": "git",
@@ -37,6 +42,7 @@
     "datatables.net-bs5": "^2.2.2",
     "datatables.net-buttons-bs5": "^3.2.2",
     "datatables.net-dt": "^2.2.2",
+    "datatables.net-select": "^3.0.0",
     "datatables.net-vue3": "^3.0.4",
     "dayjs": "^1.11.13",
     "jquery": "^3.7.1",
@@ -45,6 +51,11 @@
     "pinia": "^2.1.7",
     "vue": "^3",
     "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/datatables.net": "^1.10.28",
+    "@types/datatables.net-select": "^1.2.10",
+    "typescript": "^5.8.2"
   },
   "peerDependencies": {
     "jszip": "^3.10.1"

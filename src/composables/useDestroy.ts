@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useStoreAdvices } from './../stores/store_advices'
 
-export function destroy(model, id, callback = null) {
+export function destroy(model: string, id: number, callback?: () => void) {
 
     if(!confirm('Seguro desea eliminar?')){ return }
     const storeAdvices = useStoreAdvices()

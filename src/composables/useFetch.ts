@@ -1,12 +1,18 @@
 // Hooks
 import { ref } from 'vue'
-import axios from 'axios';
+import axios from 'axios'
+import type { AxiosRequestConfig } from 'axios'
+
+interface SetRowsConfig {
+    noCache?: boolean
+    usePost?: boolean
+    data?: any
+    callback?: () => void
+}
 
 // No agregar export async sino no arrance el seteo iniciar de rows y demás
 export function useFetch() {
-    
-    const CONFIG_DEFAULTS = { callback: null, usePost: false, data: {}}
-    const HEADER_DEFAULT = { Accept: 'application/json', 'Content-Type': 'application/json' }
+    const CONFIG_DEFAULTS: SetRowsConfig = { callback: undefined, usePost: false, data: {}}
     
     const rows = ref([])
 
@@ -21,13 +27,16 @@ export function useFetch() {
      * @param {boolean} [config.api=false] - Include API token in the request headers.
      * @param {boolean} [config.noCache=false] - Indica al service worker si debe tomar la rta de la cache
      */
-    async function setRows(url, configParam = {}){
+    async function setRows(url: string, configParam: SetRowsConfig = {}){
         
         const config = { ...CONFIG_DEFAULTS, ...configParam }
-        let headers = HEADER_DEFAULT;
+        let headers: Record<string, string> = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
         if(config.noCache) headers['Cache-Control'] = 'no-cache';
         
-        const axiosConfig  = {
+        const axiosConfig: AxiosRequestConfig = {
             headers,
             method: config.usePost ? 'post' : 'get',
         }

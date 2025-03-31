@@ -1,9 +1,13 @@
 // Hooks
 import { ref, nextTick } from 'vue'
-import { configDefaultDatatable } from './../defaults/datatable.js'
+import type { Ref } from 'vue'
+import { configDefaultDatatable } from './../defaults/datatable'
 import axios from 'axios';
 // import DataTable from 'datatables.net-dt';
 import DataTable from 'datatables.net-buttons-bs5' // incluye DataTable + buttons
+import type { Config, Api } from 'datatables.net/types/types'
+
+import type { AxiosRequestConfig } from 'axios'
 import * as jszip from 'jszip'
 import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
@@ -14,6 +18,46 @@ import 'datatables.net-buttons/js/buttons.html5.mjs';
 // // Registrar las fuentes virtuales
 // pdfMake.vfs = pdfFonts.vfs
 
+interface SetRowsConfig {
+    noCache?: boolean
+    usePost?: boolean
+    data?: any
+    callback?: () => void,
+    datatable?: {
+        buttons?: any[]
+        select?: boolean
+    }        
+}
+
+type ButtonOption = 
+  | string 
+  | { extend: string; [key: string]: any }
+
+interface DataTableConfigOptions {
+  buttons?: ButtonOption[]
+  select?: boolean
+  [key: string]: any // para permitir extensiones extra
+}
+
+type LayoutElement =
+  | 'info'
+  | 'pageLength'
+  | 'paging'
+  | 'processing'
+  | 'search'
+  | 'table'
+  | 'toolbar'
+  | 'buttons'
+  | 'filter'
+  | 'custom'
+
+type LayoutFeatures = {
+    topStart?: LayoutElement | LayoutElement[] | null
+    topEnd?: LayoutElement | LayoutElement[] | null
+    bottomStart?: LayoutElement | LayoutElement[] | null
+    bottomEnd?: LayoutElement | LayoutElement[] | null
+}
+
 // No agregar export async sino no arrance el seteo iniciar de rows y demás
 export function useFetchDatatable() {
     
@@ -21,10 +65,9 @@ export function useFetchDatatable() {
         buttons: [], 
         select: false
     }, callback: null, usePost: false, data: {}}
-    const HEADER_DEFAULT = { Accept: 'application/json', 'Content-Type': 'application/json' }
     
     const rows = ref([])
-    const dataTableTable = ref(null)
+    const dataTableTable: Ref<Api | null>  = ref(null)
 
     /**
      * Set rows in a DataTable.
@@ -41,7 +84,7 @@ export function useFetchDatatable() {
      * @param {boolean} [config.api=false] - Include API token in the request headers.
      * @param {boolean} [config.noCache=false] - Indica al service worker si debe tomar la rta de la cache
      */
-    async function setRows(url, tableId = null, configParam = {}){
+    async function setRows(url: string, tableId = null, configParam: SetRowsConfig = {}){
         
         const config = {
             ...CONFIG_DEFAULTS,
@@ -51,12 +94,14 @@ export function useFetchDatatable() {
                 ...(configParam.datatable ?? {})
             }
         }
-        let headers = { ...HEADER_DEFAULT };
+        let headers: Record<string, string> = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
         
         if(config.noCache) headers['Cache-Control'] = 'no-cache';
-        if(config.multipart) headers['Content-Type'] = 'multipart/form-data';
         
-        const axiosConfig  = {
+        const axiosConfig: AxiosRequestConfig  = {
             headers,
             method: config.usePost ? 'post' : 'get',
         }
@@ -94,12 +139,12 @@ export function useFetchDatatable() {
      * @param {string} tableIdParam - The ID of the table to initialize.
      * @param {Object} config - Configuration object for the DataTable.
      */
-    function initializeDataTable(tableIdParam, configOptions) {
+    function initializeDataTable(tableIdParam: string, configOptions: DataTableConfigOptions) {
         const buttons = configOptions.buttons ?? [];
 
         // Si se incluye alguno de los botones html5, registramos jszip/pdfmake
-        const hasExcel = buttons.some(b => (typeof b === 'string' && b === 'excelHtml5') || (typeof b === 'object' && b.extend === 'excelHtml5'));
-        const hasPdf = buttons.some(b => (typeof b === 'string' && b === 'pdfHtml5') || (typeof b === 'object' && b.extend === 'pdfHtml5'));
+        const hasExcel = buttons.some((b: ButtonOption) => (typeof b === 'string' && b === 'excelHtml5') || (typeof b === 'object' && b.extend === 'excelHtml5'));
+        const hasPdf = buttons.some((b: ButtonOption) => (typeof b === 'string' && b === 'pdfHtml5') || (typeof b === 'object' && b.extend === 'pdfHtml5'));
 
         if (hasExcel) {
             console.debug('hasExcel', hasExcel);
@@ -110,10 +155,9 @@ export function useFetchDatatable() {
         //     // DataTable.Buttons.pdfMake(pdfMake);
         // }
 
-        const tableOptions = {
-            stateSave: true,
+        const tableOptions: Config = {
             buttons,
-            select: configOptions.select ?? false,
+            // select: configOptions.select ?? false, // TODO: Refactorizar, lo saqué por ts, no lo pude configurar y como no lo estoy usando ahora, lo dejé
             ...configDefaultDatatable
         }
         dataTableTable.value = new DataTable('#' + tableIdParam, tableOptions);
