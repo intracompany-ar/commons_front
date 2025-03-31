@@ -11,7 +11,6 @@ import pdfMake from './../utils/pdfmakeconfig'
 
 // No agregar export async sino no arrance el seteo iniciar de rows y demás
 export function useFetchDatatable() {
-    
     const CONFIG_DEFAULTS = { datatable: {
         buttons: [], 
         select: false
