@@ -1,5 +1,5 @@
 export { isEmail, validarTributaryId, isJson, calculateTributaryIdFromDni } from './utils/validation'// Agregar el .js, sino en proyectos con ts, busca el validation.ts y da error not found
-export { round, promPonderadoDiasCobro, tnavToTnaa, tnaaToTnav, tnavToTndv, tasaRecargada_to_tnav, tnaToTea, teaToTna, tir } from './utils/formulas'
+export { round, promPonderadoDiasCobro, tnavToTnaa, tnaaToTnav, tnavToTndv, tasaRecargada_to_tnav,tasaRecargada_to_tea, tnaToTea, teaToTna, tir } from './utils/formulas'
 export { openModal, closeModals, hideLoaders, showLoaders,enableSubmits, disableSubmits } from './utils/dom'
 export {loadScript} from './utils/scriptLoader'
 
