@@ -4,8 +4,8 @@ export { openModal, closeModals, hideLoaders, showLoaders,enableSubmits, disable
 export {loadScript} from './utils/scriptLoader'
 
 export { useStoreAdvices } from './stores/store_advices'
+export { advice, showAdvice } from './utils/advicesBus'
 export { configDefaultDatatable } from './defaults/datatable'
-export { mountComponent } from './component_mounter'
 
 export { useFetch } from './composables/useFetch'
 export { useFetchDatatable } from './composables/useFetchDatatable'
