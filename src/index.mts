@@ -3,7 +3,7 @@ export { round, promPonderadoDiasCobro, tnavToTnaa, tnaaToTnav, tnavToTndv, tasa
 export { openModal, closeModals, hideLoaders, showLoaders,enableSubmits, disableSubmits } from './utils/dom'
 export {loadScript} from './utils/scriptLoader'
 
-export { useStoreAdvices } from './stores/store_advices'
+export { copiar } from './utils/text'
 export { advice, showAdvice } from './utils/advicesBus'
 export { configDefaultDatatable } from './defaults/datatable'
 
