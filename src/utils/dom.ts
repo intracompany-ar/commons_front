@@ -1,4 +1,5 @@
-import { Modal } from 'bootstrap'
+import bootstrap from 'bootstrap';
+const { Modal } = bootstrap;
 
 export function disableSubmits() {
     const submits = document.querySelectorAll('button[type="submit"]');
