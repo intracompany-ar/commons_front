@@ -1,4 +1,4 @@
-import type { Config } from 'datatables.net/types/types'
+import type { Config } from 'datatables.net/types/types.js'
 
 export const configDefaultDatatable: Config =  {
     serverSide: false,

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { showAdvice } from './../utils/advicesBus'
+import { showAdvice } from './../utils/advicesBus.js'
 
 export function destroy(model: string, id: number, callback?: () => void) {
 

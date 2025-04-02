@@ -3,15 +3,15 @@
   "name": "@intracompany/commons_front",
   "version": "1.0.124",
   "description": "Archivos compartidos frontend",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
+  "main": "./dist/index.js",
   "files": [
     "dist"
   ],

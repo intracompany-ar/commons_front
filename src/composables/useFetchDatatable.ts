@@ -1,16 +1,17 @@
 // Hooks
 import { ref, nextTick } from 'vue'
 import type { Ref } from 'vue'
-import { configDefaultDatatable } from './../defaults/datatable'
+import { configDefaultDatatable } from './../defaults/datatable.js'
 import axios from 'axios';
 // import DataTable from 'datatables.net-dt';
 import DataTable from 'datatables.net-buttons-bs5' // incluye DataTable + buttons
-import type { Config, Api } from 'datatables.net/types/types'
+import type { Config, Api } from 'datatables.net/types/types.js'
 
 import type { AxiosRequestConfig } from 'axios'
 import * as jszip from 'jszip'
 import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
+import $ from 'jquery'
 // import pdfmake from 'pdfmake';
 // import * as pdfMake from 'pdfmake/build/pdfmake'
 // import * as pdfFonts from 'pdfmake/build/vfs_fonts'
@@ -67,7 +68,8 @@ export function useFetchDatatable() {
     }, callback: null, usePost: false, data: {}}
     
     const rows = ref([])
-    const dataTableTable: Ref<Api | null>  = ref(null)
+    const dataTableTable = ref<DataTables.Api | null>(null)
+
 
     /**
      * Set rows in a DataTable.
@@ -148,8 +150,9 @@ export function useFetchDatatable() {
 
         if (hasExcel) {
             console.debug('hasExcel', hasExcel);
-            DataTable.Buttons.jszip(jszip);
-            console.debug('hasExcel', DataTable.Buttons);
+            (DataTable as any).Buttons.jszip(jszip)
+
+            console.debug('hasExcel', (DataTable as any).Buttons);
         }
         // if (hasPdf && DataTable?.Buttons?.pdfMake) {
         //     // DataTable.Buttons.pdfMake(pdfMake);
@@ -160,7 +163,8 @@ export function useFetchDatatable() {
             // select: configOptions.select ?? false, // TODO: Refactorizar, lo saqué por ts, no lo pude configurar y como no lo estoy usando ahora, lo dejé
             ...configDefaultDatatable
         }
-        dataTableTable.value = new DataTable('#' + tableIdParam, tableOptions);
+        // dataTableTable.value = new DataTable('#' + tableIdParam, tableOptions);
+        dataTableTable.value = $('#' + tableIdParam).DataTable(tableOptions as any)
     }
 
     function resetDataTable() {
