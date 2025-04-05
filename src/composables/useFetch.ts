@@ -11,10 +11,10 @@ interface SetRowsConfig {
 }
 
 // No agregar export async sino no arrance el seteo iniciar de rows y demás
-export function useFetch() {
+export function useFetch<T = any>() {
     const CONFIG_DEFAULTS: SetRowsConfig = { callback: undefined, usePost: false, data: {}}
     
-    const rows = ref([])
+    const rows = ref<T[]>([])
 
     /**
      * Set rows in a DataTable.
