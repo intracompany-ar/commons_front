@@ -60,14 +60,15 @@ type LayoutFeatures = {
 }
 
 // No agregar export async sino no arrance el seteo iniciar de rows y demás
-export function useFetchDatatable() {
+export function useFetchDatatable<T = any>() {
     
     const CONFIG_DEFAULTS = { datatable: {
         buttons: [], 
         select: false
     }, callback: null, usePost: false, data: {}}
     
-    const rows = ref([])
+    const rows = ref<T[]>([])
+
     const dataTableTable = ref<DataTables.Api | null>(null)
 
 
