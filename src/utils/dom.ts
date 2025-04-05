@@ -1,14 +1,18 @@
 export function disableSubmits() {
-    const submits = document.querySelectorAll('button[type="submit"]');
+    const submits = document.querySelectorAll<HTMLButtonElement>('button[type="submit"]');
     submits.forEach((submit) => {
-        (submit as HTMLButtonElement).disabled = true;
+        if (submit instanceof HTMLButtonElement) {
+            submit.disabled = true;
+        }
     });
 }
 
 export function enableSubmits() {
-    const submits = document.querySelectorAll('button[type="submit"]');
+    const submits = document.querySelectorAll<HTMLButtonElement>('button[type="submit"]');
     submits.forEach((submit) => {
-        (submit as HTMLButtonElement).disabled = false;
+        if (submit instanceof HTMLButtonElement) {
+            submit.disabled = false;
+        }
     });
 }
 
