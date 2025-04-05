@@ -132,12 +132,12 @@ export function teaToTna(tea: number, cantidadCapitalizaciones = 12) {
     return Math.round( (Math.pow(tea / 100 + 1, 1 / cantidadCapitalizaciones) - 1) * cantidadCapitalizaciones * 10000) / 100
 }
 
-export function tasaRecargada_to_tea(tasaRecargo: number, diasAlVencimiento: number, diasPorAnio = DIAS_ANIO)// diasPorAnio a veces usan 360
+export function tasaRecargada_to_tea(tasaRecargo: number, diasAlVencimiento: number, diasPorAnio = DIAS_ANIO): number // diasPorAnio a veces usan 360
 {
     // i *(1+x)^dias = f => (f/i)^(1/dias) -1 = x => x^365 = TEA
     let tasaDiaria = parseFloat(tasaRecargo.toString()) ** (1 / parseFloat(diasAlVencimiento.toString())) - 1;
 
-    return round((1 + tasaDiaria) ** DIAS_ANIO - 1, 12);
+    return (1 + tasaDiaria) ** DIAS_ANIO - 1;
 }
 
 export function tir(cashFlows: Array<number>, iterations = 1000, tolerance = 0.00001) {
