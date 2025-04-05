@@ -86,7 +86,7 @@ export function useFetchDatatable() {
      * @param {boolean} [config.api=false] - Include API token in the request headers.
      * @param {boolean} [config.noCache=false] - Indica al service worker si debe tomar la rta de la cache
      */
-    async function setRows(url: string, tableId = null, configParam: SetRowsConfig = {}){
+    async function setRows(url: string, tableId: string | undefined = undefined, configParam: SetRowsConfig = {}){
         
         const config = {
             ...CONFIG_DEFAULTS,
