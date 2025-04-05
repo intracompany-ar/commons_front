@@ -9,5 +9,7 @@ export { configDefaultDatatable } from './defaults/datatable.js'
 
 export { useFetch } from './composables/useFetch.js'
 export { useFetchDatatable } from './composables/useFetchDatatable.js'
+export type { SetRowsConfig } from './composables/useFetchDatatable.js'
+
 export { useBlob } from './composables/useBlob.js'
 export { destroy } from './composables/useDestroy.js'

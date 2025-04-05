@@ -19,7 +19,7 @@ import $ from 'jquery'
 // // Registrar las fuentes virtuales
 // pdfMake.vfs = pdfFonts.vfs
 
-interface SetRowsConfig {
+export interface SetRowsConfig {
     noCache?: boolean
     usePost?: boolean
     data?: any
@@ -31,8 +31,8 @@ interface SetRowsConfig {
 }
 
 type ButtonOption = 
-  | string 
-  | { extend: string; [key: string]: any }
+    | string 
+    | { extend: string; [key: string]: any }
 
 interface DataTableConfigOptions {
   buttons?: ButtonOption[]
@@ -41,16 +41,16 @@ interface DataTableConfigOptions {
 }
 
 type LayoutElement =
-  | 'info'
-  | 'pageLength'
-  | 'paging'
-  | 'processing'
-  | 'search'
-  | 'table'
-  | 'toolbar'
-  | 'buttons'
-  | 'filter'
-  | 'custom'
+    | 'info'
+    | 'pageLength'
+    | 'paging'
+    | 'processing'
+    | 'search'
+    | 'table'
+    | 'toolbar'
+    | 'buttons'
+    | 'filter'
+    | 'custom'
 
 type LayoutFeatures = {
     topStart?: LayoutElement | LayoutElement[] | null
