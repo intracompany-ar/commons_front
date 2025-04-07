@@ -14,7 +14,8 @@ interface SetRowsConfig {
 export function useFetch<T = any>() {
     const CONFIG_DEFAULTS: SetRowsConfig = { callback: undefined, usePost: false, data: {}}
     
-    const rows = ref<T[]>([])
+    const rows = ref<T | null>(null)
+
 
     /**
      * Set rows in a DataTable.
