@@ -86,18 +86,16 @@ export function round(value: number, decimals = 2) {
  * @param {float} tnav con decimales, no porcentajes
  * @returns 
  */
-export function tnavToTnaa(tnav: number, days = 360, daysPerYear = 360) // retorna como indíce (no %) Tasa nominal anual vencia a adelantada
-{
-    let d = days / daysPerYear;
-    let tnavAdj = parseFloat(tnav.toString()) * d;
-    return tnavAdj / (1 + tnavAdj);
+export function tnavToTnaa(tnav: number, days = 360, daysPerYear = 360): number {
+    const m = daysPerYear / days;
+    const iPerVenc = tnav / m;                 // tasa por período vencida
+    const iPerAdel = iPerVenc / (1 + iPerVenc); // tasa por período adelantada
+    return iPerAdel * m;                       // TNA anual adelantada
 }
 
-export function tnaaToTnav(tnaa: number, days = 360, daysPerYear = 360) // retorna como indíce (no %)
+export function tnaaToTnav(tnaa: number, days = 360, daysPerYear = 360): number // retorna como indíce (no %)
 {
-    
     const m = daysPerYear / days;// Ej: 360/30 = 12 meses
-    
     const iPerAdel = tnaa / m;// tasa por período adelantada
     if (iPerAdel >= 1) throw new Error('La tasa por período debe ser < 100%.');
 
