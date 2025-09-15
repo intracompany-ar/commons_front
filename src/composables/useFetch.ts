@@ -35,7 +35,7 @@ export function useFetch<T = any>() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         };
-        if(config.noCache) headers['Cache-Control'] = 'no-cache';
+        if(config.noCache) headers['Cache-Control'] = 'no-cache'
         
         const axiosConfig: AxiosRequestConfig = {
             headers,

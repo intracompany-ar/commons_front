@@ -95,10 +95,14 @@ export function tnavToTnaa(tnav: number, days = 360, daysPerYear = 360) // retor
 
 export function tnaaToTnav(tnaa: number, days = 360, daysPerYear = 360) // retorna como indíce (no %)
 {
-    let d = days / daysPerYear;
-    let tnaaAdj = parseFloat(tnaa.toString()) * d;
-    return tnaaAdj / (1 - tnaaAdj);
-};
+    const m = daysPerYear / days;// Ej: 360/30 = 12 meses
+    
+    const iPerAdel = tnaa / m;// tasa por período adelantada
+    if (iPerAdel >= 1) throw new Error('La tasa por período debe ser < 100%.');
+
+    const iPerVenc = iPerAdel / (1 - iPerAdel); // tasa por período vencida
+    return iPerVenc * m;                        // TNA vencida anual
+}
 
 /**
  * Tasa nominal anual vencida a tasa nominal diaria vencida

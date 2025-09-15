@@ -1,11 +1,10 @@
 // Hooks
 import { ref, nextTick } from 'vue'
-import type { Ref } from 'vue'
 import { configDefaultDatatable } from './../defaults/datatable.js'
 import axios from 'axios';
 // import DataTable from 'datatables.net-dt';
 import DataTable from 'datatables.net-buttons-bs5' // incluye DataTable + buttons
-import type { Config, Api } from 'datatables.net/types/types.js'
+import type { Config } from 'datatables.net/types/types.js'
 
 import type { AxiosRequestConfig } from 'axios'
 import * as jszip from 'jszip'
