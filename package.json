@@ -18,7 +18,7 @@
   "scripts": {
     "test": "test",
     "build": "tsc",
-    "release": "npm run build && npm version patch && npm publish && git push"
+    "release": "npm run build && npm version patch && npm publish && git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "@types/datatables.net": "^1.10.28",
     "@types/datatables.net-select": "^1.2.10",
     "@types/jquery": "^3.5.32",
+    "@types/node": "^24.4.0",
     "@types/sizzle": "^2.3.9",
     "datatables.net": "^2.2.2",
     "datatables.net-bs5": "^2.2.2",
@@ -50,7 +51,7 @@
     "jquery": "^3.7.1",
     "jquery-ui": "^1.14.1",
     "pdfmake": "^0.2.18",
-    "typescript": "^5.8.2",
+    "typescript": "^5.9.2",
     "vue": "^3"
   },
   "peerDependencies": {
