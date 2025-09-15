@@ -1,6 +1,6 @@
 {
   "name": "@intracompany/commons_front",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "Archivos compartidos frontend",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
