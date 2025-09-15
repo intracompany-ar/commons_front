@@ -95,6 +95,7 @@ export function tnavToTnaa(tnav: number, days = 360, daysPerYear = 360) // retor
 
 export function tnaaToTnav(tnaa: number, days = 360, daysPerYear = 360) // retorna como indíce (no %)
 {
+    
     const m = daysPerYear / days;// Ej: 360/30 = 12 meses
     
     const iPerAdel = tnaa / m;// tasa por período adelantada
